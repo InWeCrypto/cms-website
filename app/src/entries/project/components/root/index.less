@@ -1,0 +1,202 @@
+.pro-titleBox {
+	margin-top: 0.64rem;
+	width: 100%;
+	.searchbox {
+		margin-left: 0.36rem;
+		button {
+			border: 0;
+			height: 0.34rem;
+			width: 1.2rem;
+			background: #404056;
+			border-radius: 0.1rem;
+			color: rgba(255, 255, 255, 0.7);
+		}
+		.searchinput {
+			margin-right: 0.16rem;
+		}
+	}
+}
+
+.btnbox {
+	.addtrading {
+		width: 1rem;
+		height: 0.34erm;
+		background: #fff;
+		color: #333;
+		font-size: 0.14rem;
+		line-height: 0.34rem;
+		border-radius: 0.1rem;
+		margin-right: 0.22rem;
+	}
+	.addico {
+		width: 1rem;
+		height: 0.34erm;
+		background: #44cb82;
+		color: #fff;
+		font-size: 0.14rem;
+		line-height: 0.34rem;
+		border-radius: 0.1rem;
+		margin-right: 0.36rem;
+	}
+}
+.project-box {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	top: 2rem;
+	.project-list {
+		position: absolute;
+		top: 0;
+		right: 0;
+		left: 0;
+		bottom: 0.3rem;
+		overflow: auto;
+	}
+	.pagination-box {
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		padding: 0.05rem 0.3rem;
+		text-align: right;
+	}
+}
+.projectListUl {
+	margin-top: 0.94rem;
+	width: 100%;
+	box-sizing: border-box;
+	padding: 0 0.24rem;
+	flex-wrap: wrap;
+	li {
+		position: relative;
+		width: 1.7rem;
+		height: 1.7rem;
+		border-radius: 0.1rem;
+		background: #404056;
+		overflow: hidden;
+		margin-bottom: 0.36rem;
+		margin-right: 0.14rem;
+		margin-left: 0.14rem;
+		cursor: pointer;
+		.pro-mess1 {
+			padding-top: 0.18rem;
+			width: 100%;
+			.logobox {
+				margin-left: 0.08rem;
+				margin-right: 0.08rem;
+				width: 0.4rem;
+				height: 0.4rem;
+				img {
+					display: block;
+					width: 100%;
+					height: 100%;
+					object-fit: contain;
+				}
+			}
+			.messbox2 {
+				width: 1rem;
+				height: 0.4rem;
+				.name {
+					width: 1rem;
+					height: 0.22rem;
+					line-height: 0.22rem;
+					font-size: 0.16rem;
+					overflow: hidden;
+					white-space: nowrap;
+					text-overflow: ellipsis;
+					color: #fff;
+				}
+				.kinds {
+					width: 1rem;
+					color: #b0b0bd;
+					font-size: 0.12rem;
+					line-height: 0.17rem;
+				}
+			}
+		}
+		.mess3 {
+			margin: 0 auto;
+			margin-top: 0.3rem;
+			width: 1.3rem;
+			height: 0.2rem;
+			line-height: 0.2rem;
+			font-size: 0.14rem;
+			color: #b0b0bd;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+		.iconbox {
+			position: absolute;
+			left: 0;
+			bottom: 0.1rem;
+			height: 0.16rem;
+			width: 100%;
+			justify-content: flex-end;
+			.top {
+				margin-right: 0.07rem;
+				width: 0.16rem;
+				height: 0.16rem;
+				background: url("../../../../assets/images/top_ico.png")
+					no-repeat center center / cover;
+			}
+			.recommed {
+				margin-right: 0.1rem;
+				width: 0.16rem;
+				height: 0.16rem;
+				background: url("../../../../assets/images/tuijian_ico.png")
+					no-repeat center center / cover;
+			}
+		}
+		.lihoverbox {
+			position: absolute;
+			left: 0;
+			top: 0;
+			z-index: 10;
+			opacity: 0;
+			transition: all 0.3 ease-in-out;
+			background: rgba(255, 255, 255, 0.8);
+			width: 100%;
+			height: 100%;
+			align-items: center;
+			justify-content: center;
+			flex-direction: column;
+			.icon {
+				width: 0.4rem;
+				height: 0.4rem;
+				border-radius: 100%;
+				margin: 0.1rem;
+			}
+			.look {
+				background: url("../../../../assets/images/view_ico.png")
+					no-repeat center center / cover;
+				&:hover {
+					background: url("../../../../assets/images/view_ico_hover.png")
+						no-repeat center center / cover;
+				}
+			}
+			.write {
+				background: url("../../../../assets/images/edit_ico.png")
+					no-repeat center center / cover;
+				&:hover {
+					background: url("../../../../assets/images/edit_ico_hover.png")
+						no-repeat center center / cover;
+				}
+			}
+			.delt {
+				background: url("../../../../assets/images/delete_ico.png")
+					no-repeat center center / cover;
+				&:hover {
+					background: url("../../../../assets/images/delete_ico_hover.png")
+						no-repeat center center / cover;
+				}
+			}
+		}
+		&:hover {
+			.lihoverbox {
+				opacity: 1;
+			}
+		}
+	}
+}

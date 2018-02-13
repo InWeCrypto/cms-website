@@ -1,0 +1,351 @@
+.addprojectstepico {
+	overflow: auto;
+	.title {
+		margin: 0 auto;
+		margin-top: 0.68rem;
+		font-size: 0.14rem;
+		line-height: 0.2rem;
+		text-align: center;
+		color: #44cb82;
+	}
+	.progessbox {
+		margin-top: 0.66rem;
+	}
+	.step1 {
+		.formBox1 {
+			margin: 0 auto;
+			margin-top: 0.5rem;
+			width: 8rem;
+			height: 5.72rem;
+			border-radius: 0.1rem;
+			background: #404056;
+			.content {
+				.updatelogo {
+					width: 0.6rem;
+					height: 0.6rem;
+					background: #979797;
+					margin-right: 0.1rem;
+				}
+			}
+		}
+		.btn-next {
+			display: block;
+			margin: 0.34rem auto;
+		}
+	}
+	.step2 {
+		.formBox1 {
+			&.heiauto {
+				height: auto !important;
+			}
+			margin: 0 auto;
+			margin-top: 0.5rem;
+			width: 8rem;
+			min-height: 5.72rem;
+			border-radius: 0.1rem;
+			background: #404056;
+			.inputBox {
+				position: relative;
+				width: 100%;
+				min-height: 1.4rem;
+				overflow: hidden;
+				&:after {
+					display: block;
+					content: "";
+					position: absolute;
+					left: 0.3rem;
+					bottom: 0;
+					width: 7.4rem;
+					height: 2px;
+					background: #48485c;
+				}
+				&.noafter:after {
+					display: none;
+				}
+				.in-parent {
+					position: relative;
+					width: 100%;
+					height: 0.6rem;
+					margin-top: 0.4rem;
+					margin-bottom: 0.4rem;
+					align-items: center;
+					.netbox-c1 {
+						position: relative;
+						.in-right {
+							width: 3.1rem;
+							margin-right: 0.2rem;
+						}
+					}
+					.addIcon {
+						right: 0.3rem;
+						width: 0.2rem;
+						height: 0.2rem;
+						border-radius: 100%;
+						cursor: pointer;
+						background: url("../../../../assets/images/add_ico.png")
+							no-repeat center center / cover;
+					}
+				}
+				.in-child {
+					width: 100%;
+					height: 0.6rem;
+					align-items: center;
+					margin-bottom: 0.4rem;
+					.netbox-c1 {
+						position: relative;
+					}
+					.subIcon {
+						right: 0.3rem;
+						width: 0.2rem;
+						height: 0.2rem;
+						border-radius: 100%;
+						cursor: pointer;
+						background: url("../../../../assets/images/jianshao_ico.png")
+							no-repeat center center / cover;
+					}
+				}
+			}
+		}
+		.btnbox {
+			margin: 0.34rem auto;
+			align-items: center;
+			justify-content: center;
+			.btn-next {
+				margin-left: 1.1rem;
+			}
+			.btn-prev {
+				margin-right: 1.1rem;
+			}
+		}
+	}
+	.step3 {
+		color: #fff;
+		overflow: hidden;
+		.icoContent {
+			margin: 0 auto;
+			margin-top: 0.5rem;
+			padding-bottom: 0.5rem;
+			width: 8rem;
+			min-height: 3.54rem;
+			border-radius: 0.1rem;
+			background: #404056;
+			overflow: hidden;
+			.time {
+				width: 100%;
+				height: 0.6rem;
+				margin: 0.56rem auto;
+				margin-bottom: 0.29rem;
+				.mess {
+					float: left;
+					margin-left: 0.3rem;
+					margin-right: 0.46rem;
+					line-height: 0.6rem;
+					font-size: 0.16rem;
+				}
+				.timerpicker {
+					height: 0.6rem;
+					.ant-calendar-picker {
+						height: 0.6rem;
+						line-height: 0.6rem;
+						input {
+							color: #fff;
+							display: block;
+							width: 2.7rem;
+							height: 0.6rem;
+							border-radius: 0.3rem;
+							border: 1px solid #979797;
+							padding-left: 0.15rem;
+							line-height: 0.6rem;
+							background: rgba(32, 32, 59, 0.3);
+						}
+						.ant-calendar-picker-icon:after {
+							color: rgba(255, 255, 255, 0.5);
+							font-size: 0.2rem;
+							position: relative;
+							left: -0.2rem;
+							top: -0.04rem;
+						}
+					}
+					.timeline {
+						display: inline-block;
+						box-sizing: content-box;
+						margin: 0 0.32rem;
+						line-height: 0;
+						font-size: 1px;
+						height: 1px;
+						width: 0.3rem;
+						background: #979797;
+					}
+				}
+			}
+			.icotitle {
+				width: 7.4rem;
+				margin-left: 0.3rem;
+				margin-right: 0.46rem;
+				margin-bottom: 0.26rem;
+				height: 0.6rem;
+				border-bottom: 2px solid #48485c;
+				line-height: 0.6rem;
+				font-size: 0.16rem;
+			}
+			.icodetails {
+				position: relative;
+				width: 6.7rem;
+				height: 0.6rem;
+				margin-bottom: 0.26rem;
+				margin-left: 0.3rem;
+				input {
+					display: block;
+					width: 3.22rem;
+					height: 0.6rem;
+					border-radius: 0.3rem;
+					border: 1px solid #979797;
+					padding-left: 0.15rem;
+					color: #fff;
+					background: rgba(32, 32, 59, 0.3);
+					&:focus {
+						border: 1px solid #44cb82;
+						background: rgba(32, 32, 59, 1);
+					}
+				}
+				.addIcon {
+					right: -0.72rem;
+					width: 0.2rem;
+					height: 0.2rem;
+					border-radius: 100%;
+					background: url("../../../../assets/images/add_ico.png")
+						no-repeat center center / cover;
+				}
+				.subIcon {
+					right: -0.72rem;
+					width: 0.2rem;
+					height: 0.2rem;
+					border-radius: 100%;
+					background: url("../../../../assets/images/jianshao_ico.png")
+						no-repeat center center / cover;
+				}
+			}
+		}
+		.btnbox {
+			margin: 0.34rem auto;
+			align-items: center;
+			justify-content: center;
+			.btn-next {
+				margin-left: 1.1rem;
+			}
+			.btn-prev {
+				margin-right: 1.1rem;
+			}
+		}
+	}
+	.step4 {
+		position: relative;
+		color: #fff;
+		overflow: hidden;
+		.icoContent {
+			position: relative;
+			margin: 0 auto;
+			margin-top: 0.5rem;
+			padding-bottom: 0.5rem;
+			width: 8rem;
+			min-height: 3.54rem;
+			border-radius: 0.1rem;
+			background: #404056;
+			overflow: hidden;
+			.icodetails {
+				position: relative;
+				width: 6.7rem;
+				height: 0.6rem;
+				margin-top: 0.3rem;
+				margin-left: 0.3rem;
+				input {
+					display: block;
+					width: 1.48rem;
+					height: 0.6rem;
+					border-radius: 0.3rem;
+					border: 1px solid #979797;
+					padding-left: 0.15rem;
+					color: #fff;
+					background: rgba(32, 32, 59, 0.3);
+					&:focus {
+						border: 1px solid #44cb82;
+						background: rgba(32, 32, 59, 1);
+					}
+					&.content2 {
+						width: 5rem;
+					}
+				}
+				.addIcon {
+					right: -0.72rem;
+					width: 0.2rem;
+					height: 0.2rem;
+					border-radius: 100%;
+					background: url("../../../../assets/images/add_ico.png")
+						no-repeat center center / cover;
+				}
+				.subIcon {
+					right: -0.72rem;
+					width: 0.2rem;
+					height: 0.2rem;
+					border-radius: 100%;
+					background: url("../../../../assets/images/jianshao_ico.png")
+						no-repeat center center / cover;
+				}
+			}
+			.tip {
+				position: absolute;
+				left: 0.3rem;
+				bottom: 0.1rem;
+				z-index: 1;
+				color: rgba(255, 255, 255, 0.5);
+			}
+		}
+		.btnbox {
+			margin: 0.34rem auto;
+			align-items: center;
+			justify-content: center;
+			.btn-next {
+				margin-left: 1.1rem;
+			}
+			.btn-prev {
+				margin-right: 1.1rem;
+			}
+		}
+	}
+	.step5 {
+		.editArea {
+			margin: 0 auto;
+			margin-top: 0.5rem;
+			width: 8rem;
+			min-height: 6rem;
+			border-radius: 0.1rem;
+			color: #fff;
+			background: rgba(255, 255, 255, 0.5);
+		}
+		.btn-next {
+			display: block;
+			margin: 0.34rem auto;
+		}
+	}
+	.stepEnd {
+		align-items: center;
+		h1 {
+			margin-top: 1.2rem;
+			line-height: 0.56rem;
+			font-size: 0.4rem;
+			color: #fff;
+		}
+		h3 {
+			margin-top: 0.23rem;
+			line-height: 0.25rem;
+			color: #fff;
+			font-size: 0.18rem;
+			font-weight: normal;
+		}
+		.btn-next {
+			margin: 0 auto;
+			margin-top: 1.16rem;
+			margin-bottom: 0.5rem;
+		}
+	}
+}
