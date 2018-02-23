@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { Modal, Button } from "antd";
 import "./index.less";
+import { clearInterval } from "timers";
 
 export default class Root extends PureComponent {
 	constructor(props) {
@@ -22,9 +23,13 @@ export default class Root extends PureComponent {
 		});
 	}
 	sendCode() {
+		const that = this;
 		let phoneNum = this.state.phoneNum;
 		let pattern = /^((1[3,5,8][0-9])|(14[5,7])|(17[0,6,7,8])|(19[7]))\d{8}$/;
 
+		if (this.state.second > 0) {
+			return;
+		}
 		if (!phoneNum) {
 			Modal.warning({
 				title: "提示",
@@ -36,7 +41,21 @@ export default class Root extends PureComponent {
 			let params = {
 				phone: phoneNum
 			};
-			this.props.getCode(params);
+			this.props.getCode(params).then(res => {
+				if (res.code === 4000) {
+					var second = 60;
+					var timer = setInterval(() => {
+						second--;
+						if (second < 0) {
+							//clearInterval(timer);
+							return;
+						}
+						that.setState({
+							second
+						});
+					}, 1000);
+				}
+			});
 		} else {
 			//alert("请输入正确的手机号");
 			Modal.warning({
@@ -102,7 +121,7 @@ export default class Root extends PureComponent {
 		}
 	}
 	render() {
-		const { seconde, checkDev } = this.state;
+		const { seconde, checkDev, second } = this.state;
 		const {} = this.props;
 		return (
 			<div className="loginpage">
@@ -144,7 +163,7 @@ export default class Root extends PureComponent {
 								onChange={this.getPhoneNum.bind(this)}
 							/>
 							<button onClick={this.sendCode.bind(this)}>
-								验证码
+								{second ? second : "验证码"}
 							</button>
 						</div>
 						<div className="login-code">

@@ -117,7 +117,9 @@ export default class Root extends PureComponent {
 				{menuList &&
 					menuList.data &&
 					menuList.data.map((item, index) => {
-						return <Menu.Item key={index}>{item.name}</Menu.Item>;
+						return (
+							<Menu.Item key={index}>{item.group_name}</Menu.Item>
+						);
 					})}
 			</Menu>
 		);
@@ -147,10 +149,11 @@ export default class Root extends PureComponent {
 							<div className="text">权限</div>
 							<Dropdown overlay={menu} placement="bottomLeft">
 								<Button>
-									{menuList &&
+									{(menuList &&
 										type &&
 										menuList.data &&
-										menuList.data[type].name}
+										menuList.data[type].group_name) ||
+										"请选择权限"}
 									<Icon type="down" />
 								</Button>
 							</Dropdown>

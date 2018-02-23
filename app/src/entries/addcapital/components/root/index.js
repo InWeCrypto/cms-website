@@ -119,7 +119,8 @@ export default class Root extends PureComponent {
 					option.expire +
 					option.filename;
 				this.setState({
-					icon: imgAdd
+					icon: imgAdd,
+					callbackimg: imgAdd
 				});
 			}
 		});
@@ -132,6 +133,15 @@ export default class Root extends PureComponent {
 	onSubmit() {
 		const { id, name, gas, address, icon, category_id } = this.state;
 		//oHref("capital");
+
+		let reg = /^[0-9a-zA-Z]+$/;
+		if (!reg.test(address)) {
+			Modal.warning({
+				title: "提示",
+				content: "合约地址只能由数字字母组成"
+			});
+			return;
+		}
 
 		if (!id) {
 			let param = {
@@ -169,7 +179,15 @@ export default class Root extends PureComponent {
 		}
 	}
 	render() {
-		const { progressArr, text, name, gas, address, img } = this.state;
+		const {
+			progressArr,
+			text,
+			name,
+			gas,
+			address,
+			img,
+			callbackimg
+		} = this.state;
 		const {} = this.props;
 
 		return (
@@ -217,8 +235,13 @@ export default class Root extends PureComponent {
 								<div className="imgbox" id="ban_uploader">
 									<img src={upload} alt="" />
 								</div>
+								{callbackimg && (
+									<div className="imgbox">
+										<img src={callbackimg} alt="" />
+									</div>
+								)}
 								<div className="mess">
-									上传项目的logo，尺寸为：..*..,可提让UI提供*XX
+									上传项目的logo，尺寸为：100*100,可提让UI提供
 								</div>
 							</div>
 						</div>

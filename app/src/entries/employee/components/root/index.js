@@ -21,7 +21,7 @@ export default class Root extends PureComponent {
 	}
 	componentWillUpdate(nextProps, nextState) {
 		if (nextState.page != this.state.page) {
-			this, this.getData(nextState);
+			this.getData(nextState);
 		}
 	}
 	componentDidMount() {
@@ -88,7 +88,12 @@ export default class Root extends PureComponent {
 											<div className="td f1">
 												{item.phone}
 											</div>
-											<div className="f1 td">管理员</div>
+											<div className="f1 td">
+												{item.menu_group &&
+													item.menu_group.info &&
+													item.menu_group.info
+														.group_name}
+											</div>
 											<div
 												className="td"
 												style={{ width: "130px" }}

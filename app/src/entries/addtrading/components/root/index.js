@@ -51,8 +51,8 @@ export default class Root extends PureComponent {
 		this.props
 			.getProjectList()
 			.then(res => {
-				var arr = [];
-				var arrKey = [];
+				var arr = [""];
+				var arrKey = [-1];
 				for (let item in this.props.projectList) {
 					arr.push(this.props.projectList[item]);
 					arrKey.push(item);
@@ -60,7 +60,7 @@ export default class Root extends PureComponent {
 				this.setState({
 					projectList: arr,
 					projectListKey: arrKey,
-					category_id: arrKey[0]
+					category_id: arrKey[1]
 				});
 				return res;
 			})
@@ -93,9 +93,15 @@ export default class Root extends PureComponent {
 			});
 	}
 	getkey(key) {
-		this.setState({
-			category_id: this.state.projectListKey[key]
-		});
+		// if (key > 0) key = key - 1;
+		this.setState(
+			{
+				category_id: this.state.projectListKey[key]
+			},
+			function() {
+				console.log(key, this.state.category_id);
+			}
+		);
 	}
 	onDateChange(res, dataString) {
 		let dateArr = dataString.split("-");
@@ -203,14 +209,20 @@ export default class Root extends PureComponent {
 								<div className="text">空投时间</div>
 								<div className="date">
 									<DatePicker
+										allowClear={false}
 										placeholder="请选择空投开始的时间"
 										onChange={this.onDateChange.bind(this)}
-										value={moment(
-											year && month && day
-												? `${year}-${month}-${day}`
-												: "",
-											"YYYY-MM-DD"
-										)}
+										value={
+											year &&
+											month &&
+											day &&
+											moment(
+												year && month && day
+													? `${year}-${month}-${day}`
+													: "",
+												"YYYY-MM-DD"
+											)
+										}
 									/>
 								</div>
 							</div>

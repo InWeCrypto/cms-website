@@ -8,7 +8,8 @@ export const AUTHORITYLIST = `${PRE_FIX}AUTHORITYLIST`;
 export const DELETEAUTHORITY = `${PRE_FIX}DELETEAUTHORITY`;
 export const getAuthorityList = createAction(AUTHORITYLIST, params => {
 	return http.get({
-		url: "menu"
+		url: "menu",
+		params
 	});
 });
 

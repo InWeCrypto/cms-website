@@ -11,7 +11,7 @@ export const EDITEMPLOYEE = `${PRE_FIX}EDITEMPLOYEE`;
 export const getMenuGroup = createAction(GETMENUGROUP, params => {
 	return http
 		.get({
-			url: "menu?per_page=1000",
+			url: "menu_group?per_page=1000",
 			params
 		})
 		.then(res => {

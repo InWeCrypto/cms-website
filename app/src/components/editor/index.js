@@ -22,6 +22,7 @@ class Demo extends PureComponent {
 			let K = KindEditor;
 			window.editor = K.create(selector, {
 				resizeType: 1,
+				pasteType: 1,
 				allowPreviewEmoticons: false,
 				allowImageUpload: false,
 				fillDescAfterUploadImage: true,
