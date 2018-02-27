@@ -134,7 +134,7 @@ export default class Root extends PureComponent {
 								Math.ceil(labelList.total / per_page) > 1 && (
 									<Pagination
 										onChange={this.onChange.bind(this)}
-										defaultCurrent={labelList.current_page}
+										//defaultCurrent={labelList.current_page}
 										total={labelList.total}
 										defaultPageSize={per_page}
 									/>

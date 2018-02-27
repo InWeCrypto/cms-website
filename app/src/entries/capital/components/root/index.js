@@ -162,9 +162,9 @@ class Root extends PureComponent {
 								Math.ceil(capitalList.total / per_page) > 1 && (
 									<Pagination
 										onChange={this.onChange.bind(this)}
-										defaultCurrent={
-											capitalList.current_page
-										}
+										// defaultCurrent={
+										// 	capitalList.current_page
+										// }
 										total={capitalList.total}
 										defaultPageSize={per_page}
 									/>

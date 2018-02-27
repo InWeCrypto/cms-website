@@ -6,6 +6,7 @@ import { Modal } from "antd";
 const PRE_FIX = "LOGIN_";
 export const GETCODE = `${PRE_FIX}GETCODE`;
 export const LOGIN = `${PRE_FIX}LOGIN`;
+export const GETUSERLIST = `${PRE_FIX}GETUSERLIST`;
 
 export const getCode = createAction(GETCODE, params => {
 	return http
@@ -22,4 +23,14 @@ export const getCode = createAction(GETCODE, params => {
 			}
 			return res;
 		});
+});
+
+export const getUserList = createAction(GETUSERLIST, params => {
+	return http.get({
+		url: "user",
+		params: {
+			per_page: 10,
+			page: 1
+		}
+	});
 });

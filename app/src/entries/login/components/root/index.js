@@ -3,6 +3,7 @@ import { NavLink, Link } from "react-router-dom";
 import { Modal, Button } from "antd";
 import "./index.less";
 import { clearInterval } from "timers";
+import { toHref } from "../../../../utils/util.js";
 
 export default class Root extends PureComponent {
 	constructor(props) {
@@ -14,7 +15,24 @@ export default class Root extends PureComponent {
 			checkDev: true
 		};
 	}
-	componentWillReceiveProps(nextProps) {}
+	componentWillMount() {
+		let userinfoLco = window.localStorage.getItem("userInfo");
+		if (userinfoLco) {
+			let info = JSON.parse(userinfoLco);
+			if (info) {
+				let userinfo = JSON.parse(info.data);
+				if (userinfo.token) {
+					console.log(userinfo.token);
+					//验证是否token有效
+					this.props.getUserList().then(res => {
+						if (res.code == 4000) {
+							toHref("home");
+						}
+					});
+				}
+			}
+		}
+	}
 	componentDidMount() {}
 	getPhoneNum(e) {
 		let phoneNum = e.target.value;
@@ -43,7 +61,7 @@ export default class Root extends PureComponent {
 			};
 			this.props.getCode(params).then(res => {
 				if (res.code === 4000) {
-					var second = 60;
+					var second = 180;
 					var timer = setInterval(() => {
 						second--;
 						if (second < 0) {
@@ -163,7 +181,7 @@ export default class Root extends PureComponent {
 								onChange={this.getPhoneNum.bind(this)}
 							/>
 							<button onClick={this.sendCode.bind(this)}>
-								{second ? second : "验证码"}
+								{second ? second + "s" : "验证码"}
 							</button>
 						</div>
 						<div className="login-code">

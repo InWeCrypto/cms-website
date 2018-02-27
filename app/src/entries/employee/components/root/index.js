@@ -40,6 +40,14 @@ export default class Root extends PureComponent {
 	editEmployee(item) {
 		toHref("addemployee", `id=${item.id}`);
 	}
+	detelEmployee(item) {
+		let id = item.id;
+		this.props.deletEmployee(id).then(res => {
+			if (res.code == 4000) {
+				this.getData(this.state);
+			}
+		});
+	}
 	onChange(res) {
 		this.setState({
 			page: res
@@ -80,7 +88,7 @@ export default class Root extends PureComponent {
 												className="td"
 												style={{ width: "30px" }}
 											>
-												01
+												{item.id}
 											</div>
 											<div className="f1 td">
 												{item.name}
@@ -106,7 +114,14 @@ export default class Root extends PureComponent {
 												>
 													编辑
 												</button>
-												<button>删除</button>
+												<button
+													onClick={this.detelEmployee.bind(
+														this,
+														item
+													)}
+												>
+													删除
+												</button>
 											</div>
 										</div>
 									);
@@ -118,9 +133,9 @@ export default class Root extends PureComponent {
 									1 && (
 									<Pagination
 										onChange={this.onChange.bind(this)}
-										defaultCurrent={
-											employeeList.current_page
-										}
+										// defaultCurrent={
+										// 	employeeList.current_page
+										// }
 										total={employeeList.total}
 										defaultPageSize={per_page}
 									/>

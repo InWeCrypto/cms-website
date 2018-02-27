@@ -39,7 +39,10 @@ export const getCode = createAction(GETCODE, params => {
 export const getProList = createAction(GETPROLIST, params => {
 	return http
 		.get({
-			url: "category"
+			url: "category",
+			params: {
+				getKeys: true
+			}
 		})
 		.then(res => {
 			return res;
@@ -50,7 +53,8 @@ export const getProList = createAction(GETPROLIST, params => {
 export const getTagsList = createAction(GETTAGLIST, params => {
 	return http
 		.get({
-			url: "article/tags"
+			url: "article/tags",
+			params
 		})
 		.then(res => {
 			return res;

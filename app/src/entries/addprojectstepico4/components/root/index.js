@@ -59,7 +59,7 @@ export default class Root extends PureComponent {
 	}
 	setLng() {
 		let query = getRouteQuery(this);
-		if (query.lng == "cn") {
+		if (query.lng == "cn" || query.lng == "zh") {
 			return "zh";
 		} else {
 			return "en";
@@ -73,7 +73,7 @@ export default class Root extends PureComponent {
 				lngText: "英文"
 			});
 			lng = "en";
-		} else if (query.lng == "cn") {
+		} else if (query.lng == "cn" || query.lng == "zh") {
 			this.setState({
 				lngText: "中文"
 			});
@@ -288,20 +288,28 @@ export default class Root extends PureComponent {
 		if (this.state.isPutMode) {
 			//修改项目
 			this.props.postProIcoRate(data).then(res => {
-				let queryStr =
-					"lng=" +
-					query.lng +
-					"&c_id=" +
-					query.c_id +
-					"&putMode=yes&model=ico";
-				toHref("addprojectstep3", queryStr);
+				if (res.code == 4000) {
+					let queryStr =
+						"lng=" +
+						query.lng +
+						"&c_id=" +
+						query.c_id +
+						"&putMode=yes&model=ico";
+					toHref("addprojectstep3", queryStr);
+				}
 			});
 		} else {
 			//添加项目
 			this.props.postProIcoRate(data).then(res => {
-				let queryStr =
-					"lng=" + query.lng + "&c_id=" + query.c_id + "&model=ico";
-				toHref("addprojectstep3", queryStr);
+				if (res.code == 4000) {
+					let queryStr =
+						"lng=" +
+						query.lng +
+						"&c_id=" +
+						query.c_id +
+						"&model=ico";
+					toHref("addprojectstep3", queryStr);
+				}
 			});
 		}
 		// this.setState({

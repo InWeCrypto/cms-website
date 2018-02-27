@@ -123,7 +123,7 @@ export default class Root extends PureComponent {
 			this.setState({
 				lngText: "英文"
 			});
-		} else if (query.lng == "cn") {
+		} else if (query.lng == "cn" || query.lng == "zh") {
 			this.setState({
 				lngText: "中文"
 			});
@@ -857,7 +857,7 @@ export default class Root extends PureComponent {
 								<Input
 									val={desc}
 									getval={this.getIcoDesc.bind(this)}
-									name="ICO描述"
+									name="项目描述"
 									placeholder="必填项"
 									width="6.32rem"
 								/>

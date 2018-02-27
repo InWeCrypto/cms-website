@@ -8,7 +8,8 @@
 		"compile": "webpack --config webpack.config.js --progress --profile",
 		"postinstall": "electron-builder install-app-dep && webpack  --progress --profile --config webpack.dll.config.js",
 		"pack": "electron-builder --dir",
-		"dist": "webpack --config webpack.dll.config.js && electron-builder"
+		"dist": "webpack --config webpack.dll.config.js && electron-builder",
+		"dist1": "webpack --config webpack.dll.config.js&&webpack  --config webpack.config.js --progress --profile&&electron-builder"
 	},
 	"build": {
 		"appId": "com.electron.inwecrypto",
@@ -58,6 +59,7 @@
 		"normalize.css": "^7.0.0",
 		"postcss-loader": "^2.0.8",
 		"react": "^16.2.0",
+		"react-color-picker": "^4.0.2",
 		"react-css-modules": "^4.7.1",
 		"react-dev-utils": "^4.2.1",
 		"react-dom": "^16.2.0",

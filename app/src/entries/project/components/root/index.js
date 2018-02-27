@@ -224,9 +224,9 @@ export default class Root extends PureComponent {
 								Math.ceil(projectList.total / per_page) > 1 && (
 									<Pagination
 										onChange={this.onChange.bind(this)}
-										defaultCurrent={
-											projectList.current_page
-										}
+										// defaultCurrent={
+										// 	projectList.current_page
+										// }
 										total={projectList.total}
 										defaultPageSize={per_page}
 									/>

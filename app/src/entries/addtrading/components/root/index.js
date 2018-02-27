@@ -42,17 +42,17 @@ export default class Root extends PureComponent {
 				lngText: "英文",
 				lang: "en"
 			});
-		} else if (query.lng == "cn") {
+		} else if (query.lng == "cn" || query.lng == "zh") {
 			this.setState({
 				lngText: "中文",
 				lang: "zh"
 			});
 		}
+		var arr = [""];
+		var arrKey = [-1];
 		this.props
 			.getProjectList()
 			.then(res => {
-				var arr = [""];
-				var arrKey = [-1];
 				for (let item in this.props.projectList) {
 					arr.push(this.props.projectList[item]);
 					arrKey.push(item);
@@ -72,8 +72,12 @@ export default class Root extends PureComponent {
 						})
 						.then(res => {
 							let data = res.data;
+							let typeindex = arrKey.indexOf(
+								data.category_id + ""
+							);
 							this.setState({
 								category_id: data.category_id,
+								typeindex: typeindex,
 								year: data.year,
 								month: data.month,
 								day: data.day,
@@ -94,14 +98,9 @@ export default class Root extends PureComponent {
 	}
 	getkey(key) {
 		// if (key > 0) key = key - 1;
-		this.setState(
-			{
-				category_id: this.state.projectListKey[key]
-			},
-			function() {
-				console.log(key, this.state.category_id);
-			}
-		);
+		this.setState({
+			category_id: this.state.projectListKey[key]
+		});
 	}
 	onDateChange(res, dataString) {
 		let dateArr = dataString.split("-");
@@ -132,9 +131,13 @@ export default class Root extends PureComponent {
 			isEdit
 		} = this.state;
 		if (isEdit) {
+			let query = getRouteQuery(this);
+			if (query.id) {
+				var categoryid = query.id;
+			}
 			this.props
 				.putTrading({
-					category_id: category_id,
+					category_id: categoryid,
 					year: year,
 					month: month,
 					day: day,
@@ -186,7 +189,8 @@ export default class Root extends PureComponent {
 			desc,
 			category_id,
 			content,
-			lngText
+			lngText,
+			typeindex
 		} = this.state;
 		const {} = this.props;
 		const menu = (
@@ -240,7 +244,7 @@ export default class Root extends PureComponent {
                                     </Dropdown> */}
 									<DropDownList
 										typeList={projectList}
-										category_id={category_id}
+										type={typeindex}
 										getkey={this.getkey.bind(this)}
 									/>
 								</div>

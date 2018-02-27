@@ -1,7 +1,11 @@
 import React, { PureComponent } from "react";
 import { NavLink } from "react-router-dom";
+import { Modal } from "antd";
+import { toHref } from "../../utils/util.js";
 import memberImg from "../../assets/images/touxiang_icon.png";
+import logoutImg from "../../assets/images/min_icon_hover.png";
 
+const confirm = Modal.confirm;
 import "./index.less";
 class Menu extends PureComponent {
 	constructor(props) {
@@ -14,12 +18,31 @@ class Menu extends PureComponent {
 			user: JSON.parse(JSON.parse(user).data)
 		});
 	}
+	logout() {
+		confirm({
+			title: "请确认",
+			content: "确定要推出当前用户吗？",
+			onOk() {
+				localStorage.removeItem("userInfo");
+				toHref("/");
+			},
+			onCancel() {}
+		});
+	}
 	render() {
 		const { user } = this.state;
 		const { curmenu, curchildmenu } = this.props;
 		return (
 			<div className="menu-left">
-				<img className="user-logo" src={memberImg} alt="" />
+				<div className="userBoxc">
+					<img
+						className="userlogout"
+						src={logoutImg}
+						onClick={this.logout.bind(this)}
+						alt=""
+					/>
+					<img className="user-logo" src={memberImg} alt="" />
+				</div>
 				<div className="user-name">{user && user["name"]}</div>
 				<div className="user-position">
 					{user && user.menu_group && user.menu_group.group_name}

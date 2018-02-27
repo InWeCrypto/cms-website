@@ -119,7 +119,7 @@ export default class Root extends PureComponent {
 												<span>
 													{item.category &&
 													item.category.name
-														? "item.category.name"
+														? item.category.name
 														: "无"}
 												</span>
 											</div>
@@ -166,9 +166,9 @@ export default class Root extends PureComponent {
 								Math.ceil(tradingList.total / per_page) > 1 && (
 									<Pagination
 										onChange={this.onChange.bind(this)}
-										defaultCurrent={
-											tradingList.current_page
-										}
+										// defaultCurrent={
+										// 	tradingList.current_page
+										// }
 										total={tradingList.total}
 										defaultPageSize={per_page}
 									/>

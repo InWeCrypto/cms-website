@@ -5,6 +5,8 @@ import "../../assets/js/kindeditor-all-min.js";
 import "../../assets/js/lang/zh-CN.js";
 import "../../assets/js/themes/default/default.css";
 import "./index.less";
+import { setTimeout } from "timers";
+
 class Demo extends PureComponent {
 	constructor(props) {
 		super(props);
@@ -20,6 +22,7 @@ class Demo extends PureComponent {
 		function createEditer(selector) {
 			// KindEditor.ready(function(K) {
 			let K = KindEditor;
+			window.K = KindEditor;
 			window.editor = K.create(selector, {
 				resizeType: 1,
 				pasteType: 1,
@@ -46,21 +49,24 @@ class Demo extends PureComponent {
 					"link"
 				]
 			});
-			KindEditor.plugin("imageupload", function(K) {
-				var editor = this,
-					name = "hello";
-				//data-name="imageupload"
-				var imageupload = K.query(".ke-icon-imageupload ");
-				if (imageupload) {
-					imageupload.setAttribute("id", "imageupload");
-					that.uploader();
-				}
 
-				// 点击图标时执行
-				// editor.clickToolbar(name, function() {
-				// 	editor.insertHtml("你好");
-				// });
-			});
+			// K.plugin("imageupload", function(K) {
+			// 	var editor = this,
+			// 		name = "hello";
+			// 	//data-name="imageupload"
+			// 	var imageupload = K.query(".ke-icon-imageupload");
+			// 	console.log(4444);
+			// 	if (imageupload) {
+			// 		imageupload.setAttribute("id", "imageupload");
+			// 		that.uploader();
+			// 	}
+
+			// 	// 点击图标时执行
+			// 	// editor.clickToolbar(name, function() {
+			// 	// 	editor.insertHtml("你好");
+			// 	// });
+			// });
+
 			K("#aa").click(function(e) {
 				alert(editor.fullHtml());
 			});
@@ -100,6 +106,7 @@ class Demo extends PureComponent {
 		);
 	}
 	getAliKey() {
+		const that = this;
 		//获取阿里云 key
 		http
 			.get({
@@ -110,9 +117,37 @@ class Demo extends PureComponent {
 					this.setState({
 						aliImgKey: res.data
 					});
+
+					var imageupload = K.query(".ke-icon-imageupload");
+
+					if (imageupload) {
+						imageupload.setAttribute("id", "imageupload");
+						that.uploader();
+					}
 				}
 			});
+
+		window.editorTimer = setInterval(() => {
+			http
+				.get({
+					url: `upload/img?get_oss_policy`
+				})
+				.then(res => {
+					if (res.code === 4000) {
+						this.setState({
+							aliImgKey: res.data
+						});
+						var imageupload = K.query(".ke-icon-imageupload");
+
+						if (imageupload) {
+							imageupload.setAttribute("id", "imageupload");
+							that.uploader();
+						}
+					}
+				});
+		}, 800000);
 	}
+
 	uploader() {
 		const option = this.state.aliImgKey;
 		if (!option) {
@@ -153,7 +188,7 @@ class Demo extends PureComponent {
 				option.expire +
 				option.filename;
 
-			window.editor.appendHtml(
+			window.editor.insertHtml(
 				'<img src="' + imgAdd + '" style="width:400px" />'
 			);
 		});

@@ -25,7 +25,7 @@ export default class Root extends PureComponent {
 	constructor(props) {
 		super(props);
 		this.state = {
-			c_id: 47,
+			c_id: "",
 			type: 0,
 			name: "",
 			long_name: "",
@@ -100,6 +100,9 @@ export default class Root extends PureComponent {
 	}
 	componentDidMount() {
 		let query = getRouteQuery(this);
+		this.setState({
+			c_id: query.c_id
+		});
 		if (query.putMode) {
 			this.setState(
 				{
@@ -122,7 +125,7 @@ export default class Root extends PureComponent {
 			this.setState({
 				lngText: "英文"
 			});
-		} else if (query.lng == "cn") {
+		} else if (query.lng == "cn" || query.lng == "zh") {
 			this.setState({
 				lngText: "中文"
 			});
@@ -588,8 +591,8 @@ export default class Root extends PureComponent {
 
 				that.uploaderMedia(idStr, function(img) {
 					let arr = that.state.socialChild;
-                    arr[len].img = img;
-                    let narr=JSON.parse(JSON.stringify(arr))
+					arr[len].img = img;
+					let narr = JSON.parse(JSON.stringify(arr));
 					that.setState(
 						{
 							socialChild: narr
@@ -602,8 +605,8 @@ export default class Root extends PureComponent {
 					let arr = that.state.socialChild;
 					let sObj = new Object(arr[len]);
 					sObj.qr_img = img;
-                    arr[len] = sObj;
-                    let narr=JSON.parse(JSON.stringify(arr))
+					arr[len] = sObj;
+					let narr = JSON.parse(JSON.stringify(arr));
 					that.setState(
 						{
 							socialChild: narr
@@ -642,10 +645,11 @@ export default class Root extends PureComponent {
 	getValNameOrUrlSocialParent(val, idx, isName) {
 		let socialParent = this.state.socialParent;
 		if (isName) {
-			socialParent = { socialParent, name: val };
+			socialParent = { ...socialParent, name: val };
 		} else {
-			socialParent = { socialParent, url: val };
+			socialParent = { ...socialParent, url: val };
 		}
+
 		this.setState({
 			socialParent: socialParent
 		});

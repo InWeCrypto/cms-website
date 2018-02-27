@@ -237,6 +237,7 @@ export const openInstallApp = () => {
 export const toHref = (toSit, query) => {
 	let nowL = window.location.href.split("#")[0];
 	if (query) {
+		query.replace("lng=zh", "lng=cn");
 		window.location.href = nowL + "#" + toSit + "?" + query;
 	} else {
 		window.location.href = nowL + "#" + toSit;

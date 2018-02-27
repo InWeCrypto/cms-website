@@ -23,6 +23,8 @@ export default class Root extends PureComponent {
 	constructor(props) {
 		super(props);
 		this.state = {
+			category_id: 0,
+			isShowSave: true,
 			step: 1,
 			isRelatePro: false,
 			s_sole: false,
@@ -51,11 +53,13 @@ export default class Root extends PureComponent {
 		let query = getRouteQuery(this);
 		if (query.lng == "en") {
 			this.setState({
-				lngText: "英文"
+				lngText: "英文",
+				curLng: "en"
 			});
-		} else if (query.lng == "cn") {
+		} else if (query.lng == "cn" || query.lng == "zh") {
 			this.setState({
-				lngText: "中文"
+				lngText: "中文",
+				curLng: "zh"
 			});
 		}
 
@@ -125,14 +129,14 @@ export default class Root extends PureComponent {
 				content: "上传成功"
 			});
 			this.setState({
-				url: imgAdd
+				url: imgAdd,
+				hasUpload: true
 			});
 		});
 	}
 	//上传图片
 	uploaderImgById(id, callback) {
 		const option = this.state.keyOss;
-		console.log(111, option);
 		if (!option) {
 			return;
 		}
@@ -175,77 +179,121 @@ export default class Root extends PureComponent {
 	}
 	initNews() {
 		function setCategory_id(that) {
+			console.log("qq");
 			let category_id = that.state.category_id;
 			let proIdArr = that.state.proIdArr;
+			console.log(category_id);
+			console.log(proIdArr);
 			if (category_id && proIdArr && proIdArr.length > 1) {
-				let idx = proIdArr.indexOf(category_id);
+				let idx = proIdArr.indexOf(category_id + "");
 				that.setState({
 					proDrapKey: idx
 				});
 			}
 		}
-		function setTags_id() {
-			let category_id = this.state.category_id;
-			let proNameArr = this.state.proNameArr;
-			if (category_id && proIdArr && proIdArr.length > 1) {
-				let idx = proIdArr.indexOf(category_id);
-				this.setState({
-					proDrapKey: idx
+		function setTags_id(that, id) {
+			let tag_ids = that.state.tag_ids;
+			if (id) {
+				tag_ids = id;
+			}
+			let tagIdArr = that.state.tagIdArr;
+			let tagNameArr = that.state.tagNameArr;
+
+			if (tag_ids && tagIdArr && tagIdArr.length > 1) {
+				let idx = tagIdArr.indexOf(tag_ids);
+				that.setState({
+					tagDrapKey: idx
 				});
 			}
 		}
 		let query = getRouteQuery(this);
 		//获取项目列表
 		this.props.getProList().then(res => {
-			let proArr = res.data.data;
+			let proArr = res.data;
 			let proIdArr = [-1];
 			let proNameArr = ["选择关联的项目"];
-			proArr.forEach((val, idx) => {
-				proNameArr.push(val.name);
-				proIdArr.push(val.id);
-			});
-			this.setState({
-				proIdArr,
-				proNameArr
-			});
-			setCategory_id(this);
+			for (var item in proArr) {
+				proNameArr.push(proArr[item]);
+				proIdArr.push(item);
+			}
+			this.setState(
+				{
+					proIdArr,
+					proNameArr
+				},
+				function() {
+					setCategory_id(this);
+				}
+			);
 		});
-
-		//获取标签列表
-		this.props.getTagsList().then(res => {
-			let tagArr = res.data.data;
-			let tagIdArr = [-1];
-			let tagNameArr = ["选择关联的项目"];
-			tagArr.forEach((val, idx) => {
-				tagNameArr.push(val.name);
-				tagIdArr.push(val.id);
+		if (query.lng) {
+			if (query.lng == "cn" || query.lng == "zh") {
+				var lang = "zh";
+			} else {
+				var lang = "en";
+			}
+			let params = {
+				lang: lang
+			};
+			//获取标签列表
+			this.props.getTagsList(params).then(res => {
+				let tagArr = res.data.data;
+				let tagIdArr = [0];
+				let tagNameArr = ["选择关联的标签"];
+				tagArr.forEach((val, idx) => {
+					tagNameArr.push(val.name);
+					tagIdArr.push(val.id);
+				});
+				this.setState({
+					tagIdArr,
+					tagNameArr
+				});
+				setTags_id(this);
 			});
-			this.setState({
-				tagIdArr,
-				tagNameArr
-			});
-		});
+		}
 
 		//获取资讯标签
 		if (query.id) {
 			this.props.getTagsById(query.id).then(res => {
-				console.log(res);
+				if (res.code == 4000) {
+					let te = res.data[0];
+					if (te) {
+						let pivot = te.pivot;
+						if (pivot) {
+							console.log(5555, pivot.tag_id);
+							this.setState(
+								{
+									tag_ids: pivot.tag_id
+								},
+								setTags_id(this, pivot.tag_id)
+							);
+						}
+					}
+				}
 			});
 		}
 
 		//获取资讯的详情
 		if (query.id) {
+			if (query.lng == "en") {
+				var querylang = "en";
+			} else {
+				var querylang = "zh";
+			}
 			let data = {
 				id: query.id,
 				params: {
-					lang: query.lng
+					lang: querylang
 				}
 			};
 			this.props.getArticleDetail(data).then(res => {
-				this.setState({ ...res.data, type: query.type });
+				this.setState({ ...res.data, type: query.type }, function() {
+					setCategory_id(this);
+				});
 				this.setState({
 					faceimg: res.data.img,
-					isRelatePro: res.data.is_sole
+					isRelatePro: res.data.is_sole,
+					isRelatePro2: res.data.is_scroll
 				});
 				//
 				// let type = res.data.type;
@@ -257,6 +305,12 @@ export default class Root extends PureComponent {
 				// 	type
 				// });
 				//
+				let url = res.data.url;
+				if (url) {
+					this.setState({
+						hasUpload: true
+					});
+				}
 				let desc = res.data.desc;
 				if (desc) {
 					this.setState({
@@ -267,7 +321,8 @@ export default class Root extends PureComponent {
 				if (res.data.content && window.editor) {
 					window.editor.appendHtml(res.data.content);
 				}
-				setCategory_id(this);
+
+				setTags_id(this);
 			});
 		}
 	}
@@ -305,6 +360,14 @@ export default class Root extends PureComponent {
 			is_sole: isRelatePro
 		});
 	}
+	//是否轮播
+	triggerRelate2() {
+		let isRelatePro2 = !this.state.isRelatePro2;
+		this.setState({
+			isRelatePro2,
+			is_scroll: isRelatePro2
+		});
+	}
 	//获取点击的项目id
 	getDropdownKeyProId(idx) {
 		let proIdArr = this.state.proIdArr;
@@ -329,6 +392,11 @@ export default class Root extends PureComponent {
 			title: val
 		});
 	}
+	getSourceUrl(val) {
+		this.setState({
+			source_url: val
+		});
+	}
 	//保存简述
 	saveDesc() {
 		let desc = document.getElementById("imgDesTextarea").value;
@@ -338,6 +406,9 @@ export default class Root extends PureComponent {
 		Modal.success({
 			title: "提示",
 			content: "描述保存成功"
+		});
+		this.setState({
+			isShowSave: false
 		});
 	}
 	//视屏链接
@@ -350,14 +421,18 @@ export default class Root extends PureComponent {
 	newDone() {
 		let type = this.state.type;
 		let data = {
-			category_id: this.state.category_id || "",
+			category_id: this.state.category_id || 0,
 			title: this.state.title || "",
 			img: this.state.faceimg || "",
 			url: this.state.url || "",
 			desc: this.state.desc || "",
 			is_sole: this.state.is_sole || false,
+			is_scroll: this.state.is_scroll || false,
 			lang: this.getLng()
 		};
+		if (this.state.source_url) {
+			data.source_url = this.state.source_url;
+		}
 		//判断类型
 		//视频
 		if (type == 1) {
@@ -367,6 +442,11 @@ export default class Root extends PureComponent {
 		//图文
 		if (type == 2) {
 			data.type = 2;
+			data.content = window.editor.fullHtml();
+		}
+		//图文
+		if (type == 5) {
+			data.type = 4;
 			data.content = window.editor.fullHtml();
 		}
 		//文本
@@ -396,7 +476,7 @@ export default class Root extends PureComponent {
 						return;
 					}
 					let data = {
-						id: res.data.id,
+						id: query.id,
 						params: {
 							tag_ids: [tag_ids]
 						}
@@ -426,20 +506,45 @@ export default class Root extends PureComponent {
 		}
 	}
 	getLng() {
+		let curLng = this.state.curLng;
+		if (curLng) {
+			return curLng;
+		}
 		let query = getRouteQuery(this);
-		if (query.lng == "cn") {
+		if (query.lng == "cn" || query.lng == "zh") {
 			return "zh";
 		} else {
 			return "en";
 		}
 	}
+	textareaFocus() {
+		this.setState({
+			isShowSave: true
+		});
+	}
+	chooseLng(lng) {
+		if (lng == "en") {
+			this.setState({
+				lngText: "英文",
+				curLng: "en"
+			});
+		}
+		if (lng == "zh") {
+			this.setState({
+				lngText: "中文",
+				curLng: "zh"
+			});
+		}
+	}
 	render() {
 		const {
+			curLng,
 			progressArr,
 			step,
 			type,
 			isShowDes,
 			isRelatePro,
+			isRelatePro2,
 			lngText,
 			proIdArr,
 			proNameArr,
@@ -449,7 +554,10 @@ export default class Root extends PureComponent {
 			proDrapKey,
 			tagDrapKey,
 			title,
-			url
+			url,
+			isShowSave,
+			hasUpload,
+			source_url
 		} = this.state;
 		const {} = this.props;
 		const logoContent = (
@@ -465,6 +573,20 @@ export default class Root extends PureComponent {
 				<Backbtn />
 				<div className="title">
 					你正在编辑{lngText}版本，请全部使用{lngText}描述
+					&nbsp;&nbsp;&nbsp;
+					<span
+						className={curLng == "zh" ? "mess cur" : "mess"}
+						onClick={this.chooseLng.bind(this, "zh")}
+					>
+						中文
+					</span>
+					&nbsp;&nbsp;
+					<span
+						className={curLng == "en" ? "mess cur" : "mess"}
+						onClick={this.chooseLng.bind(this, "en")}
+					>
+						英文
+					</span>
 				</div>
 				{/* <div className="progessbox">
 					<Progress arr={progressArr} />
@@ -476,6 +598,13 @@ export default class Root extends PureComponent {
 							getval={this.getTitle.bind(this)}
 							name="资讯标题"
 							placeholder="请填写资讯的标题"
+							width="6.32rem"
+						/>
+						<Input
+							val={source_url}
+							getval={this.getSourceUrl.bind(this)}
+							name="原文链接"
+							placeholder="非必填项"
 							width="6.32rem"
 						/>
 						<div className="proAndnew ui ">
@@ -505,25 +634,54 @@ export default class Root extends PureComponent {
 							)}
 						</div>
 						<div className="orgial">
-							<div className="mess">是否原创</div>
-							<div className="icon ui ">
-								<div
-									className="imgbox"
-									onClick={this.triggerRelate.bind(this)}
-								>
-									{isRelatePro ? (
-										<img src={open} alt="" />
-									) : (
-										<img src={close} alt="" />
-									)}
-								</div>
-								<div
-									className="text"
-									onClick={this.triggerRelate.bind(this)}
-								>
-									{isRelatePro ? "是" : "否"}
+							<div className="half">
+								<div className="mess">是否原创</div>
+								<div className="icon ui ">
+									<div
+										className="imgbox"
+										onClick={this.triggerRelate.bind(this)}
+									>
+										{isRelatePro ? (
+											<img src={open} alt="" />
+										) : (
+											<img src={close} alt="" />
+										)}
+									</div>
+									<div
+										className="text"
+										onClick={this.triggerRelate.bind(this)}
+									>
+										{isRelatePro ? "是" : "否"}
+									</div>
 								</div>
 							</div>
+							{type == 2 && (
+								<div className="half">
+									<div className="mess">是否轮播</div>
+									<div className="icon ui ">
+										<div
+											className="imgbox"
+											onClick={this.triggerRelate2.bind(
+												this
+											)}
+										>
+											{isRelatePro2 ? (
+												<img src={open} alt="" />
+											) : (
+												<img src={close} alt="" />
+											)}
+										</div>
+										<div
+											className="text"
+											onClick={this.triggerRelate2.bind(
+												this
+											)}
+										>
+											{isRelatePro2 ? "是" : "否"}
+										</div>
+									</div>
+								</div>
+							)}
 						</div>
 					</div>
 					{/* type=1 视频 */}
@@ -557,10 +715,15 @@ export default class Root extends PureComponent {
 										id="imgDesTextarea"
 										cols="30"
 										rows="10"
+										onChange={this.textareaFocus.bind(this)}
 									/>
-									<button onClick={this.saveDesc.bind(this)}>
-										保存
-									</button>
+									{isShowSave && (
+										<button
+											onClick={this.saveDesc.bind(this)}
+										>
+											保存
+										</button>
+									)}
 								</div>
 
 								<div
@@ -593,7 +756,7 @@ export default class Root extends PureComponent {
 					)}
 
 					{/* type=2 图文或者文本 */}
-					{(type == 2 || type == 3) && (
+					{(type == 2 || type == 3 || type == 5) && (
 						<div className="step2">
 							<div className="middleBtn ui ai-c jc-c">
 								<div className="faceimg mbox">
@@ -623,10 +786,15 @@ export default class Root extends PureComponent {
 										id="imgDesTextarea"
 										cols="30"
 										rows="10"
+										onChange={this.textareaFocus.bind(this)}
 									/>
-									<button onClick={this.saveDesc.bind(this)}>
-										保存
-									</button>
+									{isShowSave && (
+										<button
+											onClick={this.saveDesc.bind(this)}
+										>
+											保存
+										</button>
+									)}
 								</div>
 
 								<div
@@ -685,10 +853,15 @@ export default class Root extends PureComponent {
 										id="imgDesTextarea"
 										cols="30"
 										rows="10"
+										onChange={this.textareaFocus.bind(this)}
 									/>
-									<button onClick={this.saveDesc.bind(this)}>
-										保存
-									</button>
+									{isShowSave && (
+										<button
+											onClick={this.saveDesc.bind(this)}
+										>
+											保存
+										</button>
+									)}
 								</div>
 
 								<div
@@ -702,7 +875,7 @@ export default class Root extends PureComponent {
 									添加描述
 								</div>
 								<div className="faceimg mbox">
-									上传文件
+									{hasUpload ? "已上传" : "上传文件"}
 									<div className="uploadFile" id="upFile" />
 								</div>
 							</div>

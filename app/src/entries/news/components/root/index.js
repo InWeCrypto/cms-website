@@ -12,6 +12,7 @@ import icon1 from "../../../../assets/images/video_ico.png";
 import icon2 from "../../../../assets/images/pic_ico.png";
 import icon3 from "../../../../assets/images/text_ico.png";
 import icon4 from "../../../../assets/images/file_ico.png";
+import icon5 from "../../../../assets/images/trading_ico2.jpg";
 import { toHref } from "../../../../utils/util";
 
 import "./index.less";
@@ -27,7 +28,14 @@ export default class Root extends PureComponent {
 			keyword: "",
 			is_scroll: "",
 			is_sole: "",
-			newsType: ["所有类型", "文本", "图文", "视频", "trading"]
+			newsType: [
+				"所有类型",
+				"文本",
+				"图文",
+				"视频",
+				"Trading view",
+				"文件"
+			]
 		};
 	}
 	componentDidMount() {
@@ -46,10 +54,16 @@ export default class Root extends PureComponent {
 		}
 	}
 	getData(state) {
+		//hack
+		if (state.type == 5) {
+			var typeTemp = 6;
+		} else {
+			var typeTemp = state.type;
+		}
 		let param = {
 			per_page: state.per_page,
 			page: state.page,
-			type: state.type
+			type: typeTemp
 		};
 		if (state.keyword.length > 0) {
 			param.keyword = state.keyword;
@@ -74,6 +88,9 @@ export default class Root extends PureComponent {
 	addFinder() {
 		toHref("addchooselng", "to=addnewsstep&type=4");
 	}
+	addTradingNews() {
+		toHref("addchooselng", "to=addnewsstep&type=5");
+	}
 	getType(type) {
 		var res = "";
 		switch (type) {
@@ -87,7 +104,10 @@ export default class Root extends PureComponent {
 				res = "视频";
 				break;
 			case 4:
-				res = "trading";
+				res = "Trading view";
+				break;
+			case 6:
+				res = "文件";
 				break;
 		}
 		return res;
@@ -104,8 +124,9 @@ export default class Root extends PureComponent {
 		});
 	}
 	typeChoose(res) {
+		let type = res.key;
 		this.setState({
-			type: res.key,
+			type,
 			page: 1
 		});
 	}
@@ -116,19 +137,18 @@ export default class Root extends PureComponent {
 	}
 	//编辑资讯
 	editNews(item) {
-		console.log(2222, item);
+		console.log(item.type);
 		let lng = item.lang;
+		if (lng == "zh") {
+			lng = "cn";
+		}
 		let id = item.id;
 		let type = item.type;
 		if (type == 6) type = 4;
-		if (type == 1) type = 3;
-		if (type == 2) type = 2;
-		if (type == 3) type = 1;
-		if (type == 4) {
-			toHref("addtrading", "lng=" + lng + "&id=" + id);
-			return;
-		}
-
+		else if (type == 1) type = 3;
+		else if (type == 2) type = 2;
+		else if (type == 3) type = 1;
+		else if (type == 4) type = 5;
 		toHref("addnewsstep", "lng=" + lng + "&id=" + id + "&type=" + type);
 	}
 	render() {
@@ -151,7 +171,7 @@ export default class Root extends PureComponent {
 						<div className="searchinput">
 							<Search
 								search={this.searchClick.bind(this)}
-								placeholder="查找项目"
+								placeholder="查找文章标题"
 							/>
 						</div>
 						<Dropdown overlay={menu} placement="bottomLeft">
@@ -167,6 +187,9 @@ export default class Root extends PureComponent {
 						</div>
 						<div onClick={this.addImgNews.bind(this)}>
 							<Bigbtn namestr="添加图文资讯" icon={icon2} />
+						</div>
+						<div onClick={this.addTradingNews.bind(this)}>
+							<Bigbtn namestr="添加Trading view" icon={icon5} />
 						</div>
 						<div onClick={this.addTextNews.bind(this)}>
 							<Bigbtn namestr="添加纯文本资讯" icon={icon3} />
@@ -221,7 +244,11 @@ export default class Root extends PureComponent {
 												</span>
 											</div>
 											<div className="f1">
-												<span>无</span>
+												<span>
+													{(item.category &&
+														item.category.name) ||
+														"无"}
+												</span>
 											</div>
 											<div className="f2">
 												<span>{item.title}</span>
@@ -285,7 +312,7 @@ export default class Root extends PureComponent {
 								Math.ceil(newsList.total / per_page) > 1 && (
 									<Pagination
 										onChange={this.onChange.bind(this)}
-										defaultCurrent={newsList.current_page}
+										// defaultCurrent={newsList.current_page}
 										total={newsList.total}
 										defaultPageSize={per_page}
 									/>

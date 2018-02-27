@@ -6,33 +6,38 @@ class Demo extends PureComponent {
 	constructor(props) {
 		super(props);
 		this.state = {
-			type: 0
+			type: 0,
+			flagtype: true
 		};
 	}
 	componentDidMount() {}
 	componentWillUpdate(nextProps, nextState) {
-		if (nextProps.category_id) {
-			this.setState({
-				type: nextProps.category_id
-			});
-		}
+		// if (nextProps.category_id) {
+		// 	this.setState({
+		// 		type: nextProps.category_id
+		// 	});
+		// }
 	}
 	componentWillReceiveProps(nextProps) {
-		this.setState({
-			type: nextProps.type
-		});
+		if (nextProps.type && this.state.flagtype) {
+			this.setState({
+				type: nextProps.type,
+				flagtype: false
+			});
+		}
+		//	console.log(this.props.type, this.props.typeList);
 	}
 	onSelectType(e) {
 		const key = e.key;
-		this.props.getkey(key);
 		this.setState({
 			type: key
 		});
+		this.props.getkey(key);
+		const { typeList } = this.props;
 	}
 	render() {
 		const { type } = this.state;
 		const { typeList } = this.props;
-
 		const menu = (
 			<Menu onClick={this.onSelectType.bind(this)}>
 				{typeList &&

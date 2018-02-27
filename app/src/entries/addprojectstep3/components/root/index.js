@@ -126,7 +126,7 @@ export default class Root extends PureComponent {
 				lngText: "英文"
 			});
 			lng = "en";
-		} else if (query.lng == "cn") {
+		} else if (query.lng == "cn" || query.lng == "zh") {
 			this.setState({
 				lngText: "中文"
 			});
@@ -170,7 +170,7 @@ export default class Root extends PureComponent {
 		let query = getRouteQuery(this);
 		let c_id = this.state.c_id;
 		let lang;
-		if (query.lng == "cn") {
+		if (query.lng == "cn" || query.lng == "zh") {
 			lang = "zh";
 		} else {
 			lang = "en";

@@ -50,7 +50,7 @@ export default class Root extends PureComponent {
 			this.setState({
 				lngText: "英文"
 			});
-		} else if (query.lng == "cn") {
+		} else if (query.lng == "cn" || query.lng == "zh") {
 			this.setState({
 				lngText: "中文"
 			});

@@ -135,9 +135,9 @@ export default class Root extends PureComponent {
 									1 && (
 									<Pagination
 										onChange={this.onChange.bind(this)}
-										defaultCurrent={
-											authorityList.current_page
-										}
+										// defaultCurrent={
+										// 	authorityList.current_page
+										// }
 										total={authorityList.total}
 										defaultPageSize={per_page}
 									/>

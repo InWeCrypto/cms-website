@@ -54,7 +54,7 @@ export default class Root extends PureComponent {
 				lngText: "英文"
 			});
 			lng = "en";
-		} else if (query.lng == "cn") {
+		} else if (query.lng == "cn" || query.lng == "zh") {
 			this.setState({
 				lngText: "中文"
 			});
@@ -243,7 +243,7 @@ export default class Root extends PureComponent {
 	nextStep3() {
 		let query = getRouteQuery(this);
 		let lng = query.lng;
-		if (lng == "cn") {
+		if (lng == "cn" || query.lng == "zh") {
 			lng = "zh";
 		}
 		//是否是修改模式
@@ -268,16 +268,24 @@ export default class Root extends PureComponent {
 		if (this.state.isPutMode) {
 			//修改项目
 			this.props.putProIco(data).then(res => {
-				console.log(res);
-				let queryStr =
-					"lng=" + query.lng + "&c_id=" + query.c_id + "&putMode=yes";
-				toHref("addprojectstepico4", queryStr);
+				if (res.code == 4000) {
+					console.log(res);
+					let queryStr =
+						"lng=" +
+						query.lng +
+						"&c_id=" +
+						query.c_id +
+						"&putMode=yes";
+					toHref("addprojectstepico4", queryStr);
+				}
 			});
 		} else {
 			//添加项目
 			this.props.postProIco(data).then(res => {
-				let queryStr = "lng=" + query.lng + "&c_id=" + query.c_id;
-				toHref("addprojectstepico4", queryStr);
+				if (res.code == 4000) {
+					let queryStr = "lng=" + query.lng + "&c_id=" + query.c_id;
+					toHref("addprojectstepico4", queryStr);
+				}
 			});
 		}
 

@@ -2,6 +2,8 @@ import React, { PureComponent } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { Modal } from "antd";
 import LngChos from "../../../../components/lngchos/index.js";
+import Backbtn from "../../../../components/backbtn/index.js";
+
 import { getQuery, toHref } from "../../../../utils/util";
 import choosed from "../../../../assets/images/selected_ico.png";
 import nochoose from "../../../../assets/images/weixuan_ico.png";
@@ -25,7 +27,8 @@ export default class Root extends PureComponent {
 	componentDidMount() {
 		let q = getQuery(window.location.href);
 		this.setState({
-			linkLang: q.lng
+			linkLang: q.lng,
+			lang: q.lng
 		});
 		if (q.id) {
 			this.props
@@ -39,6 +42,7 @@ export default class Root extends PureComponent {
 							type: type,
 							url: url,
 							img: img,
+							imgadd: img,
 							lang: lang,
 							name: name,
 							id: id
@@ -104,7 +108,8 @@ export default class Root extends PureComponent {
 					option.expire +
 					option.filename;
 				this.setState({
-					img: imgAdd
+					img: imgAdd,
+					imgadd: imgAdd
 				});
 			}
 		});
@@ -159,12 +164,12 @@ export default class Root extends PureComponent {
 		window.history.back();
 	}
 	render() {
-		const { type, url, name } = this.state;
+		const { type, url, name, imgadd } = this.state;
 		const {} = this.props;
 
 		return (
 			<div className="mainBox ui addadvertisementBox fd-c ai-c jc-c">
-				<div className="backBtn" onClick={this.goBack.bind(this)} />
+				<Backbtn />
 				<div className="mbox contentBox ui fd-c jc-sa">
 					<div className="box1 ui">
 						<div className="text">广告位</div>
@@ -217,6 +222,13 @@ export default class Root extends PureComponent {
 									<img src={upload} />
 								</div>
 							</div>
+							{imgadd && (
+								<div className="imgbox">
+									<div>
+										<img src={imgadd} />
+									</div>
+								</div>
+							)}
 							<div className="mess">
 								广告位1的图建议尺寸为
 								{type == 1 ? "195*209" : "714*142"}

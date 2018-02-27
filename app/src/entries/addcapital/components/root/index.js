@@ -50,6 +50,7 @@ export default class Root extends PureComponent {
 						let data = res.data;
 						this.setState({
 							icon: data.icon,
+							callbackimg: data.icon,
 							address: data.address,
 							gas: data.gas,
 							id: data.id,
@@ -138,7 +139,7 @@ export default class Root extends PureComponent {
 		if (!reg.test(address)) {
 			Modal.warning({
 				title: "提示",
-				content: "合约地址只能由数字字母组成"
+				content: "合约地址由英文大小写和数字组成"
 			});
 			return;
 		}
