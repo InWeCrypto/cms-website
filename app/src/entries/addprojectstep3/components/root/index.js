@@ -835,7 +835,7 @@ export default class Root extends PureComponent {
 						val={proDesTitle}
 						getval={this.getProDesTitle.bind(this)}
 						name="这里是标题"
-						placeholder="（项目介绍无需但标题）"
+						placeholder="（非必填，项目介绍无需标题）"
 						width="6.32rem"
 					/>
 				</div>

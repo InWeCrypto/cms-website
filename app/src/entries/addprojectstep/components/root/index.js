@@ -70,13 +70,7 @@ export default class Root extends PureComponent {
 				}
 			],
 			isNextLoading: false,
-			typeList: [
-				"筛选项目状态",
-				"交易中",
-				"正在进行",
-				"即将开始",
-				"已结束"
-			],
+			typeList: ["筛选项目状态", "正在进行", "即将开始", "已结束"],
 			browserChild: [],
 			walletChild: [],
 			socialChild: [],
@@ -117,6 +111,11 @@ export default class Root extends PureComponent {
 			this.setState({
 				isIco: true
 			});
+		} else {
+			this.setState({
+				type: 1,
+				onlyType: true
+			});
 		}
 		const that = this;
 		if (query.lng == "en") {
@@ -156,10 +155,15 @@ export default class Root extends PureComponent {
 		let c_id = this.state.c_id;
 		this.props.getProDetail(c_id).then(res => {
 			let data = res.data;
+			let type = 0;
+			if (data.type) {
+				type = data.type - 1;
+			}
 			that.setState({
 				long_name: data.long_name,
 				name: data.name,
-				type: data.type,
+				type,
+				chargeType: data.type,
 				img: data.img,
 				website: data.website,
 				unit: data.unit,
@@ -174,6 +178,7 @@ export default class Root extends PureComponent {
 		const {
 			c_id,
 			type,
+
 			name,
 			long_name,
 			img,
@@ -191,7 +196,6 @@ export default class Root extends PureComponent {
 			website &&
 			unit &&
 			token_holder &&
-			ico_price &&
 			desc
 		) {
 			let obj = {
@@ -421,8 +425,9 @@ export default class Root extends PureComponent {
 	}
 
 	getDropdownKey(key) {
+		var type = parseInt(key) + 1;
 		this.setState({
-			type: key
+			type
 		});
 	}
 	//上传图片
@@ -740,6 +745,8 @@ export default class Root extends PureComponent {
 			lngText,
 			typeList,
 			type,
+			onlyType,
+			chargeType,
 			name,
 			long_name,
 			img,
@@ -804,12 +811,15 @@ export default class Root extends PureComponent {
 									width="6.32rem"
 								/>
 							</div>
-							<div className="logo mgt-3">
-								<Formtext
-									name="项目类型"
-									content={typeContent}
-								/>
-							</div>
+							{!onlyType && (
+								<div className="logo mgt-3">
+									<Formtext
+										name="项目类型"
+										content={typeContent}
+									/>
+								</div>
+							)}
+
 							<div className="logo mgt-3">
 								<Formtext
 									name="项目Logo"
@@ -843,16 +853,18 @@ export default class Root extends PureComponent {
 									width="6.32rem"
 								/>
 							</div>
+							{type == 1 && (
+								<div className="mgt-3">
+									<Input
+										val={ico_price}
+										getval={this.getIcoPrice.bind(this)}
+										name="ICO价格"
+										placeholder="必填项"
+										width="6.32rem"
+									/>
+								</div>
+							)}
 
-							<div className="mgt-3">
-								<Input
-									val={ico_price}
-									getval={this.getIcoPrice.bind(this)}
-									name="ICO价格"
-									placeholder="必填项"
-									width="6.32rem"
-								/>
-							</div>
 							<div className="mgt-3">
 								<Input
 									val={desc}

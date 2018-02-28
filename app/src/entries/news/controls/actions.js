@@ -5,6 +5,7 @@ import { Modal } from "antd";
 
 const PRE_FIX = "NEWS_";
 export const GETLIST = `${PRE_FIX}GETLIST`;
+export const GETPRLIST = `${PRE_FIX}GETPRLIST`;
 export const DELETENEWS = `${PRE_FIX}DELETENEWS`;
 
 export const getNewsList = createAction(GETLIST, params => {
@@ -30,4 +31,15 @@ export const deleteNews = createAction(DELETENEWS, params => {
 			}
 			return res;
 		});
+});
+
+export const getProjectList = createAction(GETPRLIST, params => {
+	return http.get({
+		url: "category",
+		params: {
+			per_page: 1000,
+			page: 1,
+			type: 0
+		}
+	});
 });

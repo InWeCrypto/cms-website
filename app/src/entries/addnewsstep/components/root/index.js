@@ -655,7 +655,7 @@ export default class Root extends PureComponent {
 									</div>
 								</div>
 							</div>
-							{type == 2 && (
+							{(type == 2 || type == 1) && (
 								<div className="half">
 									<div className="mess">是否轮播</div>
 									<div className="icon ui ">

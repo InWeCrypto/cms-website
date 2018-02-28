@@ -134,7 +134,7 @@ class Demo extends PureComponent {
 				})
 				.then(res => {
 					if (res.code === 4000) {
-						this.setState({
+						that.setState({
 							aliImgKey: res.data
 						});
 						var imageupload = K.query(".ke-icon-imageupload");

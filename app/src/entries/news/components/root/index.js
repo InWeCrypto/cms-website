@@ -21,6 +21,7 @@ export default class Root extends PureComponent {
 	constructor(props) {
 		super(props);
 		this.state = {
+			ca_id: 0,
 			per_page: 10,
 			page: 1,
 			type: 0,
@@ -35,15 +36,34 @@ export default class Root extends PureComponent {
 				"视频",
 				"Trading view",
 				"文件"
-			]
+			],
+			caidlist: ["所有项目"],
+			caidlistname: "所有项目",
+			caid: [0]
 		};
 	}
 	componentDidMount() {
 		this.getData(this.state);
+		this.props.getProjectList().then(res => {
+			if (res.code == 4000) {
+				var list = res.data.data;
+				var nameList = ["所有项目"];
+				var idList = [0];
+				list.forEach((val, idx) => {
+					nameList.push(val.name);
+					idList.push(val.id);
+				});
+				this.setState({
+					caidlist: nameList,
+					caid: idList
+				});
+			}
+		});
 	}
 	componentWillUpdate(nextProps, nextState) {
 		if (
 			nextState.page != this.state.page ||
+			nextState.ca_id != this.state.ca_id ||
 			nextState.type != this.state.type ||
 			nextState.lang != this.state.lang ||
 			nextState.keyword != this.state.keyword ||
@@ -60,10 +80,12 @@ export default class Root extends PureComponent {
 		} else {
 			var typeTemp = state.type;
 		}
+		var category_id = state.ca_id;
 		let param = {
 			per_page: state.per_page,
 			page: state.page,
-			type: typeTemp
+			type: typeTemp,
+			category_id
 		};
 		if (state.keyword.length > 0) {
 			param.keyword = state.keyword;
@@ -130,6 +152,17 @@ export default class Root extends PureComponent {
 			page: 1
 		});
 	}
+	caidChoose(res) {
+		let key = res.key;
+		let caidlist = this.state.caidlist;
+		let caid = this.state.caid;
+
+		this.setState({
+			ca_id: caid[key],
+			caidlistname: caidlist[key],
+			page: 1
+		});
+	}
 	deleteNews(item) {
 		this.props.deleteNews({
 			id: item.id
@@ -137,7 +170,6 @@ export default class Root extends PureComponent {
 	}
 	//编辑资讯
 	editNews(item) {
-		console.log(item.type);
 		let lng = item.lang;
 		if (lng == "zh") {
 			lng = "cn";
@@ -152,7 +184,15 @@ export default class Root extends PureComponent {
 		toHref("addnewsstep", "lng=" + lng + "&id=" + id + "&type=" + type);
 	}
 	render() {
-		const { per_page, searchClick, newsType, type } = this.state;
+		const {
+			per_page,
+			searchClick,
+			newsType,
+			type,
+			caidlist,
+			caidlistname,
+			ca_id
+		} = this.state;
 		const { newsList } = this.props;
 		const menu = (
 			<Menu onClick={this.typeChoose.bind(this)}>
@@ -162,6 +202,15 @@ export default class Root extends PureComponent {
 					})}
 			</Menu>
 		);
+		const menu2 = (
+			<Menu onClick={this.caidChoose.bind(this)}>
+				{caidlist &&
+					caidlist.map((item, index) => {
+						return <Menu.Item key={index}>{item}</Menu.Item>;
+					})}
+			</Menu>
+		);
+
 		return (
 			<div className="mainBox ui">
 				<Menunav curmenu="news" />
@@ -177,6 +226,13 @@ export default class Root extends PureComponent {
 						<Dropdown overlay={menu} placement="bottomLeft">
 							<Button>
 								{newsType[type]}
+								<Icon type="down" />
+							</Button>
+						</Dropdown>
+						<div style={{ width: "0.05rem" }} />
+						<Dropdown overlay={menu2} placement="bottomLeft">
+							<Button>
+								{caidlistname}
 								<Icon type="down" />
 							</Button>
 						</Dropdown>
