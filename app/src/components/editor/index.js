@@ -188,9 +188,7 @@ class Demo extends PureComponent {
 				option.expire +
 				option.filename;
 
-			window.editor.insertHtml(
-				'<img src="' + imgAdd + '" style="width:400px" />'
-			);
+			window.editor.insertHtml('<img src="' + imgAdd + '"  />');
 		});
 	}
 
