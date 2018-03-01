@@ -34,6 +34,8 @@ import AddSocial from "./entries/addsocial";
 import AddEmployee from "./entries/addemployee";
 import Authority from "./entries/authority";
 import AddAuthor from "./entries/addauthor";
+import Addtransactionbulletin from "./entries/addtransactionbulletin";
+import Transactionbulletin from "./entries/transactionbulletin";
 //authority  addauthor
 export default () => {
 	return (
@@ -72,6 +74,14 @@ export default () => {
 			<Route path="/social" component={Social} />
 			<Route path="/addsocial" component={AddSocial} />
 			<Route path="/addemployee" component={AddEmployee} />
+			<Route
+				path="/transactionbulletin"
+				component={Transactionbulletin}
+			/>
+			<Route
+				path="/addtransactionbulletin"
+				component={Addtransactionbulletin}
+			/>
 		</Switch>
 	);
 };

@@ -19,6 +19,7 @@ class Demo extends PureComponent {
 		// }
 	}
 	componentWillReceiveProps(nextProps) {
+		console.log(nextProps.type, 2333);
 		if (nextProps.type && this.state.flagtype) {
 			this.setState({
 				type: nextProps.type,

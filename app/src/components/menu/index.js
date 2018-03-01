@@ -72,6 +72,22 @@ class Menu extends PureComponent {
 							</NavLink>
 						</div>
 					</li>
+					<li
+						className={
+							curmenu == "transactionbulletin" ? "cur" : ""
+						}
+					>
+						<div className="menu-transactionbulletin menuicon" />
+						<div className="menu-name">
+							<NavLink
+								to={{
+									pathname: "/transactionbulletin"
+								}}
+							>
+								交易所公告
+							</NavLink>
+						</div>
+					</li>
 					<li className={curmenu == "trading" ? "cur" : ""}>
 						<div className="menu-trading menuicon" />
 						<div className="menu-name">

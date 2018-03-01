@@ -105,18 +105,25 @@ export default class Root extends PureComponent {
 					this.putMode();
 				}
 			);
+		} else {
+			//判断是否是ico
+			if (query.model == "ico") {
+				this.setState({
+					isIco: true
+				});
+			} else {
+				this.setState({
+					type: 1,
+					onlyType: true
+				});
+			}
 		}
-		//判断是否是ico
 		if (query.model == "ico") {
 			this.setState({
 				isIco: true
 			});
-		} else {
-			this.setState({
-				type: 1,
-				onlyType: true
-			});
 		}
+
 		const that = this;
 		if (query.lng == "en") {
 			this.setState({
@@ -150,20 +157,28 @@ export default class Root extends PureComponent {
 			}
 		});
 	}
+	//修改类型
 	putMode() {
 		const that = this;
 		let c_id = this.state.c_id;
 		this.props.getProDetail(c_id).then(res => {
 			let data = res.data;
-			let type = 0;
-			if (data.type) {
-				type = data.type - 1;
+			var type = 0;
+			if (data.type == 1) {
+				type = 1;
+				this.setState({
+					onlyType: true
+				});
+			} else if (data.type) {
+				type = data.type;
+				this.setState({
+					isIco: true
+				});
 			}
 			that.setState({
 				long_name: data.long_name,
 				name: data.name,
 				type,
-				chargeType: data.type,
 				img: data.img,
 				website: data.website,
 				unit: data.unit,
@@ -176,9 +191,9 @@ export default class Root extends PureComponent {
 
 	firstEndAndNext() {
 		const {
+			chargeType,
 			c_id,
 			type,
-
 			name,
 			long_name,
 			img,
@@ -186,8 +201,10 @@ export default class Root extends PureComponent {
 			unit,
 			token_holder,
 			ico_price,
+			isIco,
 			desc
 		} = this.state;
+
 		if (
 			type &&
 			name &&
@@ -198,8 +215,14 @@ export default class Root extends PureComponent {
 			token_holder &&
 			desc
 		) {
+			//如果选择过项目类型，用项目类型的key+1作为type
+			if (chargeType) {
+				var tempType = parseInt(chargeType) + 1;
+			} else {
+				var tempType = type;
+			}
 			let obj = {
-				type,
+				type: tempType,
 				name,
 				long_name,
 				img,
@@ -221,7 +244,7 @@ export default class Root extends PureComponent {
 					let query = getRouteQuery(this);
 					let queryStr =
 						"lng=" + query.lng + "&c_id=" + c_id + "&putMode=yes";
-					if (query.model == "ico") {
+					if (query.model == "ico" || isIco) {
 						queryStr += "&model=ico";
 					}
 					toHref("addprojectstep2", queryStr);
@@ -231,7 +254,7 @@ export default class Root extends PureComponent {
 				this.props.postProBaseMess(obj).then(res => {
 					let query = getRouteQuery(this);
 					let queryStr = "lng=" + query.lng + "&c_id=" + res.data.id;
-					if (query.model == "ico") {
+					if (query.model == "ico" || isIco) {
 						queryStr += "&model=ico";
 					}
 					toHref("addprojectstep2", queryStr);
@@ -425,9 +448,10 @@ export default class Root extends PureComponent {
 	}
 
 	getDropdownKey(key) {
-		var type = parseInt(key) + 1;
+		//var type = parseInt(key) + 1;
 		this.setState({
-			type
+			type: key,
+			chargeType: key
 		});
 	}
 	//上传图片
@@ -775,7 +799,7 @@ export default class Root extends PureComponent {
 		);
 		const typeContent = (
 			<DropDown
-				type={type}
+				type={type ? type - 1 : 0}
 				getkey={this.getDropdownKey.bind(this)}
 				typeList={typeList}
 			/>
@@ -853,7 +877,7 @@ export default class Root extends PureComponent {
 									width="6.32rem"
 								/>
 							</div>
-							{type == 1 && (
+							{onlyType && (
 								<div className="mgt-3">
 									<Input
 										val={ico_price}
