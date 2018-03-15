@@ -101,7 +101,11 @@ export default class Root extends PureComponent {
                 OSSAccessKeyId: option.accessid
             },
             server: option.host,
-            method: "POST"
+            method: "POST",
+            accept: {
+                extensions: "pdf",
+                mimeTypes: ".pdf"
+            }
         });
         uploader.on("fileQueued", file => {
             option.filename = file.name;
