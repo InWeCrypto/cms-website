@@ -17,6 +17,9 @@ import AddProjectStepIco4 from "./entries/addprojectstepico4";
 import ProDashboard from "./entries/prodashboard";
 import Employee from "./entries/employee";
 import News from "./entries/news";
+import Newsproject from "./entries/newsproject";
+import Newsopinion from "./entries/newsopinion";
+import Newsdynamic from "./entries/newsdynamic";
 import Tradingnews from "./entries/tradingnews";
 import AddNewsStep from "./entries/addnewsstep";
 import Trading from "./entries/trading";
@@ -37,6 +40,8 @@ import Authority from "./entries/authority";
 import AddAuthor from "./entries/addauthor";
 import Addtransactionbulletin from "./entries/addtransactionbulletin";
 import Transactionbulletin from "./entries/transactionbulletin";
+import Helpcenter from "./entries/helpcenter";
+
 //authority  addauthor
 export default() => {
     return (
@@ -59,6 +64,9 @@ export default() => {
             <Route path="/prodashboard" component={ProDashboard}/>
             <Route path="/employee" component={Employee}/>
             <Route path="/news" component={News}/>
+            <Route path="/newsproject" component={Newsproject}/>
+            <Route path="/newsopinion" component={Newsopinion}/>
+            <Route path="/newsdynamic" component={Newsdynamic}/>
             <Route path="/tradingnews" component={Tradingnews}/>
             <Route path="/addnewsstep" component={AddNewsStep}/>
             <Route path="/trading" component={Trading}/>
@@ -77,6 +85,9 @@ export default() => {
             <Route path="/addemployee" component={AddEmployee}/>
             <Route path="/transactionbulletin" component={Transactionbulletin}/>
             <Route path="/addtransactionbulletin" component={Addtransactionbulletin}/>
+            <Route path="/helpcenter" component={Helpcenter}/>
+            
+            
         </Switch>
     );
 };

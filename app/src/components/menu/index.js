@@ -32,8 +32,13 @@ class Menu extends PureComponent {
             onCancel() {}
         });
     }
+    showNewsChildMenu(){
+        this.setState({
+            newsMenuOnChoosed: !this.state.newsMenuOnChoosed
+        })
+    }
     render() {
-        const {user} = this.state;
+        const {user, newsMenuOnChoosed} = this.state;
         const {curmenu, curchildmenu} = this.props;
         return (
             <div className="menu-left">
@@ -67,20 +72,90 @@ class Menu extends PureComponent {
                         </div>
                     </li>
                     <li
-                        className={curmenu == "news"
-                        ? "cur"
-                        : ""}>
+                        className={(newsMenuOnChoosed || (curmenu == "news" &&  curchildmenu))
+                        ? "cur newsShowChildMenu"
+                        : "newsShowChildMenu"}>
                         <div className="menu-news menuicon"/>
-                        <div className="menu-name">
-                            <NavLink
+                        <div className="menu-name" onClick={this.showNewsChildMenu.bind(this)}>
+                            {/* <NavLink
                                 to={{
                                 pathname: "/news"
-                            }}>
+                            }}> */}
                                 资讯管理
-                            </NavLink>
+                            {/* </NavLink> */}
+                        </div>
+                        <div className="childNewsMenu" >
+                            <span
+                                className={curchildmenu == "newsproject"
+                                ? "cur"
+                                : ""}>
+                                <NavLink
+                                    to={{
+                                    pathname: "/newsproject"
+                                }}>
+                                    项目资讯
+                                </NavLink>
+                            </span>
+                            <span
+                                className={
+                                    curchildmenu == "newsdynamic" ? "cur" : ""
+                                }
+                            >
+                                <NavLink
+                                    to={{
+                                        pathname: "/newsdynamic"
+                                    }}
+                                >
+                                    动态资讯
+                                </NavLink>
+                            </span>
+                            <span
+                                className={curchildmenu == "newsopinion"
+                                ? "cur"
+                                : ""}>
+                                <NavLink
+                                    to={{
+                                    pathname: "/newsopinion"
+                                }}>
+                                    观点资讯
+                                </NavLink>
+                            </span>
+                            <span
+                                className={curchildmenu == "tradingnews"
+                                ? "cur"
+                                : ""}>
+                                <NavLink
+                                    to={{
+                                    pathname: "/tradingnews"
+                                }}>
+                                    期望资讯
+                                </NavLink>
+                            </span>
+                            <span
+                                className={curchildmenu == "employee"
+                                ? "cur"
+                                : ""}>
+                                <NavLink
+                                    to={{
+                                    pathname: "/employee"
+                                }}>
+                                    交易所公告
+                                </NavLink>
+                            </span>
+                            <span
+                                className={curchildmenu == "helpcenter"
+                                ? "cur"
+                                : ""}>
+                                <NavLink
+                                    to={{
+                                    pathname: "/helpcenter"
+                                }}>
+                                    帮助中心
+                                </NavLink>
+                            </span>
                         </div>
                     </li>
-                    <li
+                    {/* <li
                         className={curmenu == "tradingnews"
                         ? "cur"
                         : ""}>
@@ -93,7 +168,7 @@ class Menu extends PureComponent {
                                 Trading View
                             </NavLink>
                         </div>
-                    </li>
+                    </li> */}
                     <li
                         className={curmenu == "transactionbulletin"
                         ? "cur"

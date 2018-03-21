@@ -59,6 +59,9 @@
 		cursor: pointer;
 		&:hover,
 		&.cur {
+            .childNewsMenu{
+                height: auto;
+            }
 			color: #44cb82;
 			a {
 				color: #44cb82;
@@ -102,11 +105,51 @@
 				background: url("../../assets/images/xitongshezhi_ico_selected.png")
 					no-repeat center center / contain;
 			}
-		}
+        }
+        &.newsShowChildMenu{
+            overflow: hidden;
+            &.cur{
+                height: auto;
+            }
+            .menuicon{
+                top: .14rem;
+            }
+        }
 		.childMenu {
 			position: relative;
 			left: 3px;
 			opacity: 0;
+			transition: all 0.4s ease;
+			span {
+				display: block;
+				position: relative;
+				text-align: center;
+				font-size: 0.14rem;
+				line-height: 0.2rem;
+				color: #44cb82;
+				margin-top: 0.14rem;
+				&:hover:after,
+				&.cur:after {
+					display: block;
+					content: "";
+					position: absolute;
+					left: 50%;
+					bottom: 0;
+					transform: translateX(-50%);
+					width: 0.56rem;
+					height: 1px;
+					background: linear-gradient(
+						to right,
+						rgba(68, 203, 130, 0.3),
+						rgba(68, 203, 130, 1)
+					);
+				}
+			}
+        }
+        .childNewsMenu {
+			position: relative;
+			left: 3px;
+			height: 0;
 			transition: all 0.4s ease;
 			span {
 				display: block;

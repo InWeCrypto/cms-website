@@ -115,11 +115,19 @@ export default class Root extends PureComponent {
 		}
 	}
 	changeType() {
-		this.props.putChangeType(this.state.c_id).then(res => {
+        var obj = {
+            id: this.state.c_id
+        };
+        if(this.state.type == 1){
+            obj.type = 2
+        }else{
+            obj.type = 1
+        }
+		this.props.putChangeType(obj).then(res => {
 			this.setState({
-				noChange: true
+				type:  obj.type
 			});
-		});
+        });
 	}
 	render() {
 		const {
@@ -192,28 +200,28 @@ export default class Root extends PureComponent {
 							仍在，但是暂时不在官网展示
 						</div>
 					</div>
-					{/* ico项目 */}
-					{type == 2 && (
-						<div
-							className={
-								noChange
-									? "cellbox ui fd-c ai-c Hide"
-									: "cellbox ui fd-c ai-c"
-							}
-						>
-							<div
-								className="icon"
-								onClick={this.changeType.bind(this)}
-							>
-								<img src={change} alt="" />
-							</div>
-							<div className="text1">更改为“交易”状态</div>
-							<div className="textcontent">
-								项目变更后，只保留项目基本
-								属性（概括、一些参数、介绍等）
-							</div>
-						</div>
-					)}
+					{/* 更改项目类型 */}
+                    <div
+                        className={
+                            noChange
+                                ? "cellbox ui fd-c ai-c "
+                                : "cellbox ui fd-c ai-c"
+                        }
+                    >
+                        <div
+                            className="icon"
+                            onClick={this.changeType.bind(this)}
+                        >
+                            <img src={change} alt="" />
+                        </div>
+                        <div className="text1">更改为{
+                            type == 1 ? "ico" : "交易" 
+                        }状态</div>
+                        <div className="textcontent">
+                            项目变更后，只保留项目基本
+                            属性（概括、一些参数、介绍等）
+                        </div>
+                    </div>
 				</div>
 				<div className="mess4">版本编辑</div>
 				<div className="btnbox ui jc-c ai-c">

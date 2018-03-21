@@ -198,7 +198,7 @@ export default class Root extends PureComponent {
 				<div className="step1 ">
 					<div className="formBox1 ui fd-c jc-sa">
 						<div className="box1 ui">
-							<div className="text">项目全称</div>
+							<div className="text">项目符号</div>
 							<input
 								className="minput"
 								type="text"

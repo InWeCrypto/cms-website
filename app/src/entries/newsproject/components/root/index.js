@@ -37,7 +37,7 @@ export default class Root extends PureComponent {
             is_scroll: "",
             is_sole: "",
             newsType: [
-                "所有类型", "Trading图文", "Trading视频"
+                "所有类型", "文本", "图文", "视频", "文件"
             ],
             caidlist: ["所有项目"],
             caidlistname: "所有项目",
@@ -69,13 +69,10 @@ export default class Root extends PureComponent {
     }
     getData(state) {
         //hack
-        if (state.type == 5) {
+        if (state.type == 4) {
             var typeTemp = 6;
         } else {
             var typeTemp = state.type;
-            if (!typeTemp) {
-                typeTemp = "[4,7]"
-            }
         }
         var category_id = state.ca_id;
         let param = {
@@ -98,12 +95,20 @@ export default class Root extends PureComponent {
             .getNewsList(param);
     }
     addVideoNews() {
-        toHref("addchooselng", "to=addnewsstep&type=7");
+        toHref("addchooselng", "to=addnewsstep&type=1");
     }
     addImgNews() {
+        toHref("addchooselng", "to=addnewsstep&type=2");
+    }
+    addTextNews() {
+        toHref("addchooselng", "to=addnewsstep&type=3");
+    }
+    addFinder() {
+        toHref("addchooselng", "to=addnewsstep&type=4");
+    }
+    addTradingNews() {
         toHref("addchooselng", "to=addnewsstep&type=5");
     }
-
     getType(type) {
         var res = "";
         switch (type) {
@@ -117,13 +122,10 @@ export default class Root extends PureComponent {
                 res = "视频";
                 break;
             case 4:
-                res = "Trading图文";
+                res = "Trading view";
                 break;
             case 6:
                 res = "文件";
-                break;
-            case 7:
-                res = "Trading视频";
                 break;
         }
         return res;
@@ -135,11 +137,7 @@ export default class Root extends PureComponent {
         this.setState({keyword: res, page: 1});
     }
     typeChoose(res) {
-        if (res.key == 1) {
-            var type = 4
-        } else if (res.key == 2) {
-            var type = 7
-        }
+        let type = res.key;
         this.setState({type, page: 1});
     }
     caidChoose(res) {
@@ -172,8 +170,6 @@ export default class Root extends PureComponent {
             type = 1;
         else if (type == 4) 
             type = 5;
-        else if (type == 7) 
-            type = 7;
         toHref("addnewsstep", "lng=" + lng + "&id=" + id + "&type=" + type);
     }
     render() {
@@ -208,8 +204,8 @@ export default class Root extends PureComponent {
 
         return (
             <div className="mainBox ui">
-                <Menunav curmenu="news" curchildmenu="tradingnews"/>
-                <div className="home-box f1 tradingnewsBox">
+                <Menunav curmenu="news" curchildmenu="newsproject"/>
+                <div className="home-box f1 newsBox">
                     <Title namestr="资讯管理"/>
                     <div className="searchbox ui ai-c">
                         <div className="searchinput">
@@ -221,13 +217,7 @@ export default class Root extends PureComponent {
                         </div>
                         <Dropdown overlay={menu} placement="bottomLeft">
                             <Button>
-                                {type
-                                    ? (type == 4
-                                        ? newsType[1]
-                                        : (type == 7
-                                            ? newsType[2]
-                                            : newsType[0]))
-                                    : newsType[0]}
+                                {newsType[type]}
                                 <Icon type="down"/>
                             </Button>
                         </Dropdown>
@@ -247,15 +237,29 @@ export default class Root extends PureComponent {
                             onClick={this
                             .addVideoNews
                             .bind(this)}>
-                            <Bigbtn namestr="添加trading视频" icon={icon1}/>
+                            <Bigbtn namestr="添加视频资讯" icon={icon1}/>
                         </div>
                         <div
                             onClick={this
                             .addImgNews
                             .bind(this)}>
-                            <Bigbtn namestr="添加trading图文" icon={icon2}/>
+                            <Bigbtn namestr="添加图文资讯" icon={icon2}/>
                         </div>
-
+                        {/* <div onClick={this.addTradingNews.bind(this)}>
+							<Bigbtn namestr="添加Trading view" icon={icon5} />
+						</div> */}
+                        <div
+                            onClick={this
+                            .addTextNews
+                            .bind(this)}>
+                            <Bigbtn namestr="添加纯文本资讯" icon={icon3}/>
+                        </div>
+                        <div
+                            onClick={this
+                            .addFinder
+                            .bind(this)}>
+                            <Bigbtn namestr="添加文件直接上传" icon={icon4}/>
+                        </div>
                     </div>
                     <div className="listBox table">
                         <div className="listBoxThead ui">

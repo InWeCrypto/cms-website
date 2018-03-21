@@ -33,12 +33,12 @@ export const getProDetail = createAction(GETDETAIL, id => {
 putChangeType;
 
 //更改项目详情
-export const putChangeType = createAction(PUTDETAIL, id => {
+export const putChangeType = createAction(PUTDETAIL, data => {
 	return http
 		.put({
-			url: `category/${id}`,
+			url: `category/${data.id}`,
 			params: {
-				type: 1
+				type: data.type
 			}
 		})
 		.then(res => {
