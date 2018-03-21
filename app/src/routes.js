@@ -86,8 +86,6 @@ export default() => {
             <Route path="/transactionbulletin" component={Transactionbulletin}/>
             <Route path="/addtransactionbulletin" component={Addtransactionbulletin}/>
             <Route path="/helpcenter" component={Helpcenter}/>
-            
-            
         </Switch>
     );
 };

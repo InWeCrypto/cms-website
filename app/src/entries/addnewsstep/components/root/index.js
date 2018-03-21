@@ -375,6 +375,7 @@ export default class Root extends PureComponent {
         if (this.state.source_url) {
             data.source_url = this.state.source_url;
         }
+
         //判断类型 视频
         if (type == 1) {
             data.type = 3;
@@ -401,18 +402,40 @@ export default class Root extends PureComponent {
                 .editor
                 .fullHtml();
         }
-
         //文件
         if (type == 4) {
             data.type = 6;
             data.content = "";
         }
-
         //trading 视频
         if (type == 7) {
             data.type = 7;
             data.content = this.state.url || "";
         }
+        
+        //
+        //扩展处理 排除1-7，8开始
+        //
+        //文本、图文  8帮助中心-文本 9帮助中心-图文 12帮助中心-文本 13观点资讯-图文
+        if (type == 8 || type == 9 || type == 12|| type == 13) {
+            data.type = type;
+            data.content = window
+                .editor
+                .fullHtml();
+        }
+        //视屏  10帮助中心-视频  14观点资讯-视频
+        if (type == 10 || type == 14) {
+            data.type = type;
+            data.content = this.state.url || "";
+        }
+        //文件  11帮助中心-文件  15观点资讯-文件
+        if (type == 11 || type == 15) {
+            data.type = type;
+            data.content = "";
+        }
+
+
+
         let query = getRouteQuery(this);
         if (query.id) {
             //
@@ -444,7 +467,14 @@ export default class Root extends PureComponent {
                                 //是trading
                                 if (type == 5 || type == 7) {
                                     toHref("tradingnews");
-                                } else {
+                                } else if(type == 8 || type == 9 || type == 10 || type == 11){
+                                    //返回帮助中心
+                                    toHref("helpcenter");
+                                }
+                                else if(type == 12 || type == 13 || type == 14 || type == 15){
+                                    toHref("tradingnews");
+                                }
+                                else {
                                     toHref("news");
                                 }
                             });
@@ -472,7 +502,14 @@ export default class Root extends PureComponent {
                                 //是trading
                                 if (type == 5 || type == 7) {
                                     toHref("tradingnews");
-                                } else {
+                                }else if(type == 8 || type == 9 || type == 10 || type == 11){
+                                    //返回帮助中心
+                                    toHref("helpcenter");
+                                }
+                                else if(type == 12 || type == 13 || type == 14 || type == 15){
+                                    toHref("tradingnews");
+                                }
+                                 else {
                                     toHref("news");
                                 }
                             });
@@ -659,8 +696,8 @@ export default class Root extends PureComponent {
                             )}
                         </div>
                     </div>
-                    {/* type=1 视频 */}
-                    {(type == 1 || type == 7) && (
+                    {/* t视频 10帮助中心-视频*/}
+                    {(type == 1 || type == 7 || type == 10) && (
                         <div className="step2">
                             <div className="middleBtn ui ai-c jc-c">
                                 <div className="faceimg mbox">
@@ -718,8 +755,8 @@ export default class Root extends PureComponent {
                         </div>
                     )}
 
-                    {/* type=2 图文或者文本 */}
-                    {(type == 2 || type == 3 || type == 5) && (
+                    {/*  图文或者文本 8帮助中心-文本,9帮助中心-图文*/}
+                    {(type == 2 || type == 3 || type == 5 || type == 8 || type == 9 ) && (
                         <div className="step2">
                             <div className="middleBtn ui ai-c jc-c">
                                 {type != 3 && (
@@ -775,8 +812,8 @@ export default class Root extends PureComponent {
 							</div> */}
                         </div>
                     )}
-                    {/* type=4 文件 */}
-                    {type == 4 && (
+                    {/* 文件 11帮助中心-文件*/}
+                    {(type == 4 || type == 11) && (
                         <div className="step2">
                             <div className="middleBtn ui ai-c jc-c">
                                 <div className="faceimg mbox">
