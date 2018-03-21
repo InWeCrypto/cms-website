@@ -148,9 +148,19 @@ export default class Root extends PureComponent {
         this.setState({ca_id: caid[key], caidlistname: caidlist[key], page: 1});
     }
     deleteNews(item) {
-        this
-            .props
-            .deleteNews({id: item.id});
+        const that = this;
+        Modal.confirm({
+            title: "提示",
+            content: "确认删除",
+            onOk: function(){
+                that
+                .props
+                .deleteNews({id: item.id});
+            },
+            onCancel: function(){
+
+            }
+        });
     }
     //编辑资讯
     editNews(item) {
@@ -204,7 +214,7 @@ export default class Root extends PureComponent {
 
         return (
             <div className="mainBox ui">
-                <Menunav curmenu="news" curchildmenu="newsproject"/>
+                <Menunav curmenu="news" curchildmenu="newsdynamic"/>
                 <div className="home-box f1 newsBox">
                     <Title namestr="资讯管理"/>
                     <div className="searchbox ui ai-c">

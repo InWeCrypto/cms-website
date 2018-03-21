@@ -202,7 +202,7 @@ export default class Root extends PureComponent {
 
 		return (
 			<div className="mainBox ui">
-				<Menunav curmenu="transactionbulletin" />
+				<Menunav curmenu="news" curchildmenu="transactionbulletin" />
 				<div className="home-box f1 newsBox">
 					<Title namestr="交易所公告" />
 					<div className="searchbox ui ai-c">

@@ -697,7 +697,7 @@ export default class Root extends PureComponent {
                         </div>
                     </div>
                     {/* t视频 10帮助中心-视频*/}
-                    {(type == 1 || type == 7 || type == 10) && (
+                    {(type == 1 || type == 7 || type == 10 || type == 14) && (
                         <div className="step2">
                             <div className="middleBtn ui ai-c jc-c">
                                 <div className="faceimg mbox">
@@ -755,8 +755,8 @@ export default class Root extends PureComponent {
                         </div>
                     )}
 
-                    {/*  图文或者文本 8帮助中心-文本,9帮助中心-图文*/}
-                    {(type == 2 || type == 3 || type == 5 || type == 8 || type == 9 ) && (
+                    {/*  图文或者文本 8帮助中心-文本,9帮助中心-图文,12观点资讯-文本,13观点资讯-图文*/}
+                    {(type == 2 || type == 3 || type == 5 || type == 8 || type == 9 || type == 12 || type == 13 ) && (
                         <div className="step2">
                             <div className="middleBtn ui ai-c jc-c">
                                 {type != 3 && (
@@ -812,8 +812,8 @@ export default class Root extends PureComponent {
 							</div> */}
                         </div>
                     )}
-                    {/* 文件 11帮助中心-文件*/}
-                    {(type == 4 || type == 11) && (
+                    {/* 文件 11帮助中心-文件 15观点资讯-文件*/}
+                    {(type == 4 || type == 11 || type == 15)  && (
                         <div className="step2">
                             <div className="middleBtn ui ai-c jc-c">
                                 <div className="faceimg mbox">

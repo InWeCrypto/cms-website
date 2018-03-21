@@ -43,7 +43,21 @@ export default class Root extends PureComponent {
 		toHref("addadvertisement", `id=${id}&&lng=${lang}`);
 	}
 	deleteItem(item) {
-		this.props.deleteAdver({ id: item.id });
+        const that = this;
+        Modal.confirm({
+            title: "提示",
+            content: "确认删除",
+            onOk: function(){
+                that
+                .props
+                .deleteAdver({id: item.id});
+            },
+            onCancel: function(){
+
+            }
+        });
+
+		
 	}
 	render() {
 		const { per_page } = this.state;

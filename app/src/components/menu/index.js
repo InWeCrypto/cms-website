@@ -132,12 +132,12 @@ class Menu extends PureComponent {
                                 </NavLink>
                             </span>
                             <span
-                                className={curchildmenu == "employee"
+                                className={curchildmenu == "transactionbulletin"
                                 ? "cur"
                                 : ""}>
                                 <NavLink
                                     to={{
-                                    pathname: "/employee"
+                                    pathname: "/transactionbulletin"
                                 }}>
                                     交易所公告
                                 </NavLink>
@@ -169,7 +169,7 @@ class Menu extends PureComponent {
                             </NavLink>
                         </div>
                     </li> */}
-                    <li
+                    {/* <li
                         className={curmenu == "transactionbulletin"
                         ? "cur"
                         : ""}>
@@ -182,7 +182,7 @@ class Menu extends PureComponent {
                                 交易所公告
                             </NavLink>
                         </div>
-                    </li>
+                    </li> */}
                     {/* <li className={curmenu == "trading" ? "cur" : ""}>
 						<div className="menu-trading menuicon" />
 						<div className="menu-name">

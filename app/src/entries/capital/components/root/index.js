@@ -57,8 +57,20 @@ class Root extends PureComponent {
 	deleteCapital(item) {
 		let param = {
 			id: item.id
-		};
-		this.props.deleteCapital(param);
+        };
+        const that = this;
+        Modal.confirm({
+            title: "提示",
+            content: "确认删除",
+            onOk: function(){
+                that
+                .props
+                .deleteCapital(param);
+            },
+            onCancel: function(){
+
+            }
+        });
 	}
 	render() {
 		const { per_page } = this.state;
