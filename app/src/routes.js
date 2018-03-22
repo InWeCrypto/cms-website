@@ -41,6 +41,7 @@ import AddAuthor from "./entries/addauthor";
 import Addtransactionbulletin from "./entries/addtransactionbulletin";
 import Transactionbulletin from "./entries/transactionbulletin";
 import Helpcenter from "./entries/helpcenter";
+import Choicebulletin from "./entries/choicebulletin";
 
 //authority  addauthor
 export default() => {
@@ -86,6 +87,7 @@ export default() => {
             <Route path="/transactionbulletin" component={Transactionbulletin}/>
             <Route path="/addtransactionbulletin" component={Addtransactionbulletin}/>
             <Route path="/helpcenter" component={Helpcenter}/>
+            <Route path="/choicebulletin" component={Choicebulletin}/>
         </Switch>
     );
 };

@@ -24,7 +24,7 @@ export default class Root extends PureComponent {
 			ca_id: 0,
 			per_page: 10,
 			page: 1,
-			type: 0,
+			type: 16,
 			lang: "zh",
 			keyword: "",
 			is_scroll: "",
@@ -72,16 +72,17 @@ export default class Root extends PureComponent {
 	}
 	getData(state) {
 		let param = {
+			type: state.type,
 			per_page: state.per_page,
 			page: state.page
 		};
-		if (state.source_name == "筛选交易所") {
-			param.source_name = "";
-		} else {
-			param.source_name = state.source_name;
-		}
 		if (state.keyword.length > 0) {
 			param.keyword = state.keyword;
+		}
+		if (state.source_name == "筛选交易所") {
+			param.author = "";
+		} else {
+			param.author = state.source_name;
 		}
 		this.props.getTransList(param).then(res => {
 			this.setState({
@@ -91,6 +92,9 @@ export default class Root extends PureComponent {
 	}
 	addVideoNews() {
 		toHref("addchooselng", "to=addtransactionbulletin?type=3");
+	}
+	addNews(){
+		toHref("addchooselng", "to=choicebulletin");
 	}
 	getType(type) {
 		var res = "";
@@ -219,9 +223,16 @@ export default class Root extends PureComponent {
 							</Button>
 						</Dropdown>
 					</div>
-					<div className="bigbtnBox ui">
+					
+					{/*<div className="bigbtnBox ui">
 						<div onClick={this.addVideoNews.bind(this)}>
 							<Bigbtn namestr="添加交易所公告" icon={icon1} />
+						</div>
+					</div>*/}
+					
+					<div className="bigbtnBox ui">
+						<div onClick={this.addNews.bind(this)}>
+							<Bigbtn namestr="添加" icon={icon1} />
 						</div>
 					</div>
 					<div className="listBox table">
@@ -262,10 +273,10 @@ export default class Root extends PureComponent {
 												<span>{item.id}</span>
 											</div>
 											<div className="f1">
-												<span>{item.source_name}</span>
+												<span>{item.author}</span>
 											</div>
 											<div className="f2">
-												<span>{item.desc}</span>
+												<span>{item.title}</span>
 											</div>
 											<div className="f2">
 												<span>

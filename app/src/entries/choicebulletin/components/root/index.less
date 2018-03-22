@@ -1,0 +1,258 @@
+.bulletinBox {
+	display: block;
+    
+    .exchangeBox{
+        button {
+            border: 0;
+            height: 0.34rem;
+            width: 1.2rem;
+            background: #404056;
+            border-radius: 0.1rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .searchinput {
+            margin-right: 0.16rem;
+        }
+        .search{
+            margin-left: 10px;
+        }
+    }
+    
+	.searchbox {
+		position: absolute;
+		right: 0.36rem;
+		top: 0.4rem;
+		button {
+			border: 0;
+			height: 0.34rem;
+			width: 1rem;
+			background: #404056;
+			border-radius: 0.1rem;
+			color: rgba(255, 255, 255, 0.7);
+		}
+		.searchinput {
+			margin-right: 0.16rem;
+		}
+	}
+	.bigbtnBox {
+		margin-top: 0.34rem;
+		margin-left: 0.36rem;
+		width: 100%;
+		height: 0.34rem;
+		overflow: auto;
+	}
+	.listBox {
+		padding: 0.33rem 0.36rem 0 0.36rem;
+		width: 100%;
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		top: 1.4rem;
+		box-sizing: border-box;
+		
+		.f2{
+            span{
+                float: left;
+                display: block;
+                width: 100%;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+                padding: 0 5px;
+            }
+        }
+		
+		&.table {
+			.listBoxThead {
+				width: 100%;
+				background-color: transparent;
+				box-sizing: border-box;
+				padding: 0.07rem 0.27rem;
+				justify-content: space-between;
+				span {
+					display: block;
+					height: 0.2rem;
+					line-height: 0.2rem;
+					font-size: 0.14rem;
+					color: rgba(96, 96, 110, 1);
+					text-align: center;
+				}
+			}
+			.listBoxTbody {
+				padding: 0rem 0.27rem;
+				box-sizing: border-box;
+				background-color: #404056;
+				border-radius: 0.09rem;
+				position: absolute;
+				left: 0.36rem;
+				right: 0.36rem;
+				top: 0.7rem;
+				bottom: 0.5rem;
+				box-sizing: border-box;
+				overflow: auto;
+				//min-height: 1.8rem;
+				.cell-content {
+					font-size: 0.14rem;
+					color: #b0b0bd;
+					width: 100%;
+					height: 0.67rem;
+					line-height: 0.67rem;
+					border-bottom: 1px solid #121227;
+					div {
+						text-align: center;
+						overflow: hidden;
+					}
+					.btn-box {
+						align-items: center;
+						justify-content: center;
+						button {
+							color: #fff;
+							border-radius: 0.1rem;
+							font-size: 0.12rem;
+							line-height: 0.26rem;
+							width: 0.56rem;
+							height: 0.26rem;
+							margin: 0.07rem;
+							background: linear-gradient(
+								rgba(130, 224, 172, 1),
+								rgba(71, 196, 127, 1)
+							);
+							&:hover {
+								background: linear-gradient(
+									rgba(71, 196, 127, 1),
+									rgba(130, 224, 172, 1)
+								);
+							}
+							&.ban{
+							    background:rgba(216,216,216,1);
+							    color: #ffffff;
+							}
+						}
+					}
+				}
+
+				.tr {
+					width: 100%;
+					height: 0.68rem;
+					border-bottom: 1px solid #6d6d7d;
+					justify-content: space-between;
+					.td {
+						font-size: 0.14rem;
+						color: rgba(176, 176, 189, 1);
+						line-height: 0.2rem;
+						text-align: center;
+						button {
+							display: inline-block;
+							font-weight: 400;
+							text-align: center;
+							white-space: nowrap;
+							vertical-align: middle;
+							-ms-touch-action: manipulation;
+							touch-action: manipulation;
+							cursor: pointer;
+							-webkit-user-select: none;
+							-moz-user-select: none;
+							-ms-user-select: none;
+							user-select: none;
+							background-image: none;
+							border: 1px solid transparent;
+							padding: 0.04rem 0.16rem;
+							background: linear-gradient(
+								rgba(130, 224, 172, 1),
+								rgba(71, 196, 127, 1)
+							);
+							font-size: 0.12rem;
+							color: rgba(255, 255, 255, 1);
+							border-radius: 0.06rem;
+							line-height: 1.5;
+							margin-right: 0.14rem;
+							&:last-child {
+								margin-right: 0;
+							}
+						}
+					}
+				}
+			}
+		}
+		.listBoxTable {
+			width: 100%;
+			background: rgba(64, 64, 86, 1);
+			border-radius: 0.09rem;
+			min-height: 3.8rem;
+			margin-top: 0.42rem;
+			padding: 0.07rem 0.27rem;
+                    
+			table {
+				width: 100%;
+				background-color: transparent;
+				margin-top: -0.42rem;
+				thead tr th {
+					padding: 0.07rem 0;
+					height: 0.2rem;
+					line-height: 0.2rem;
+					font-size: 0.14rem;
+					color: rgba(96, 96, 110, 1);
+					text-align: center;
+				}
+				tbody tr td {
+					font-size: 0.14rem;
+					padding: 0.2rem 0;
+					color: rgba(176, 176, 189, 1);
+					line-height: 1.42857143;
+					border-bottom: 1px solid #6d6d7d;
+					text-align: center;
+					button {
+						display: inline-block;
+						font-weight: 400;
+						text-align: center;
+						white-space: nowrap;
+						vertical-align: middle;
+						-ms-touch-action: manipulation;
+						touch-action: manipulation;
+						cursor: pointer;
+						-webkit-user-select: none;
+						-moz-user-select: none;
+						-ms-user-select: none;
+						user-select: none;
+						background-image: none;
+						border: 1px solid transparent;
+						padding: 0.04rem 0.16rem;
+						background: linear-gradient(
+							rgba(130, 224, 172, 1),
+							rgba(71, 196, 127, 1)
+						);
+						font-size: 0.12rem;
+						color: rgba(255, 255, 255, 1);
+						border-radius: 0.06rem;
+						line-height: 1.5;
+						margin-right: 0.14rem;
+						&:last-child {
+							margin-right: 0;
+						}
+					}
+				}
+			}
+		}
+		.pagination-box {
+			text-align: right;
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			box-sizing: border-box;
+			padding: 0.1rem 0.36rem;
+			
+			button{
+			    float: right;
+			    border: 0;
+                height: 0.34rem;
+                width: 1.2rem;
+                background: #404056;
+                border-radius: 0.1rem;
+                color: rgba(255, 255, 255, 0.7);
+                margin-left: 10px;
+			}
+		}
+	}
+}
