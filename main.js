@@ -73,10 +73,10 @@ function createWindow() {
 	// Create the browser window.
 	win = new BrowserWindow({
 		show: false,
-		width: 1440,
-		height: 900,
-		minHeight: 900,
-		minWidth: 1440,
+		width: 1280,
+		height: 600,
+		minHeight: 600,
+		minWidth: 1280,
 		webPreferences: {
 			webSecurity: false
 		},
