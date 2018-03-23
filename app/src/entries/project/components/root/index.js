@@ -170,7 +170,7 @@ export default class Root extends PureComponent {
 													<div className="messbox2">
 														<div className="name">
 															<span>
-																{item.unit}
+																{item.name}
 															</span>
 															<span>
 																({

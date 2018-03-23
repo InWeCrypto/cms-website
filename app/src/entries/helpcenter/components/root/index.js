@@ -78,8 +78,8 @@ export default class Root extends PureComponent {
         let param = {
             per_page: state.per_page,
             page: state.page,
-            type: typeTemp,
-            category_id
+            type: "[8,9,10,11]",
+            category_id: 0
         };
         if (state.keyword.length > 0) {
             param.keyword = state.keyword;
@@ -137,7 +137,10 @@ export default class Root extends PureComponent {
         this.setState({keyword: res, page: 1});
     }
     typeChoose(res) {
-        let type = res.key;
+        let type = parseInt(res.key);
+        if(type > 0){
+            type = type + 7;
+        }
         this.setState({type, page: 1});
     }
     caidChoose(res) {
@@ -225,22 +228,22 @@ export default class Root extends PureComponent {
                                 .bind(this)}
                                 placeholder="查找文章ID或标题关键字"/>
                         </div>
-                        <Dropdown overlay={menu} placement="bottomLeft">
+                        {/* <Dropdown overlay={menu} placement="bottomLeft">
                             <Button>
                                 {newsType[type]}
                                 <Icon type="down"/>
                             </Button>
-                        </Dropdown>
+                        </Dropdown> */}
                         <div
                             style={{
                             width: "0.05rem"
                         }}/>
-                        <Dropdown overlay={menu2} placement="bottomLeft">
+                        {/* <Dropdown overlay={menu2} placement="bottomLeft">
                             <Button>
                                 {caidlistname}
                                 <Icon type="down"/>
                             </Button>
-                        </Dropdown>
+                        </Dropdown> */}
                     </div>
                     <div className="bigbtnBox ui">
                         <div
