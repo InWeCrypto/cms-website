@@ -34,11 +34,10 @@ export const getProjectList = createAction(GETPRLISTE, params => {
 export const getTransList = createAction(GETTLIST, params => {
 	return http
 		.get({
-			url: "ex_notice",
+			url: "article",
 			params
 		})
 		.then(res => {
-			console.log(res);
 			return res;
 		});
 });
