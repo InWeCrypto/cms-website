@@ -78,8 +78,8 @@ export default class Root extends PureComponent {
         let param = {
             per_page: state.per_page,
             page: state.page,
-            type: typeTemp,
-            category_id
+            type: "[12,13,14,15]",
+            category_id: 0
         };
         if (state.keyword.length > 0) {
             param.keyword = state.keyword;
@@ -95,36 +95,30 @@ export default class Root extends PureComponent {
             .getNewsList(param);
     }
     addVideoNews() {
-        toHref("addchooselng", "to=addnewsstep&type=1");
+        toHref("addchooselng", "to=addnewsstep&type=14");
     }
     addImgNews() {
-        toHref("addchooselng", "to=addnewsstep&type=2");
+        toHref("addchooselng", "to=addnewsstep&type=13");
     }
     addTextNews() {
-        toHref("addchooselng", "to=addnewsstep&type=3");
+        toHref("addchooselng", "to=addnewsstep&type=12");
     }
     addFinder() {
-        toHref("addchooselng", "to=addnewsstep&type=4");
-    }
-    addTradingNews() {
-        toHref("addchooselng", "to=addnewsstep&type=5");
+        toHref("addchooselng", "to=addnewsstep&type=15");
     }
     getType(type) {
         var res = "";
         switch (type) {
-            case 1:
+            case 12:
                 res = "文本";
                 break;
-            case 2:
+            case 13:
                 res = "图文";
                 break;
-            case 3:
+            case 14:
                 res = "视频";
                 break;
-            case 4:
-                res = "Trading view";
-                break;
-            case 6:
+            case 15:
                 res = "文件";
                 break;
         }
@@ -225,22 +219,22 @@ export default class Root extends PureComponent {
                                 .bind(this)}
                                 placeholder="查找文章ID或标题关键字"/>
                         </div>
-                        <Dropdown overlay={menu} placement="bottomLeft">
+                        {/* <Dropdown overlay={menu} placement="bottomLeft">
                             <Button>
                                 {newsType[type]}
                                 <Icon type="down"/>
                             </Button>
-                        </Dropdown>
+                        </Dropdown> */}
                         <div
                             style={{
                             width: "0.05rem"
                         }}/>
-                        <Dropdown overlay={menu2} placement="bottomLeft">
+                        {/* <Dropdown overlay={menu2} placement="bottomLeft">
                             <Button>
                                 {caidlistname}
                                 <Icon type="down"/>
                             </Button>
-                        </Dropdown>
+                        </Dropdown> */}
                     </div>
                     <div className="bigbtnBox ui">
                         <div
