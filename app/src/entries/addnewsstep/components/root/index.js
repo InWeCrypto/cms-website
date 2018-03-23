@@ -38,7 +38,9 @@ export default class Root extends PureComponent {
                 }
             ],
             proDrapKey: 0,
-            tagDrapKey: 0
+            tagDrapKey: 0,
+            levelType: ["高-在系统栏提示信息","低-在app中更新资讯，不在系统栏提示"],
+            chooseLeveltype: 1
         };
     }
     componentDidMount() {
@@ -271,6 +273,12 @@ export default class Root extends PureComponent {
                     // let type = res.data.type; if (type == 6) type = 4; if (type == 1) type = 3;
                     // if (type == 2) type = 2; if (type == 3) type = 1; this.setState({ 	type });
                     //
+                    //推送优先
+                    if(res.data.send_app_message){
+                        this.setState({chooseLeveltype: 0});
+                    }else{
+                        this.setState({chooseLeveltype: 1});
+                    }
                     let url = res.data.url;
                     if (url) {
                         this.setState({hasUpload: true});
@@ -375,6 +383,12 @@ export default class Root extends PureComponent {
         if (this.state.source_url) {
             data.source_url = this.state.source_url;
         }
+        //推送优先级
+        if(this.state.chooseLeveltype == 0){
+            data.send_app_message = true;
+        }else{
+            data.send_app_message = false;
+        }
 
         //判断类型 视频
         if (type == 1) {
@@ -472,10 +486,11 @@ export default class Root extends PureComponent {
                                     toHref("helpcenter");
                                 }
                                 else if(type == 12 || type == 13 || type == 14 || type == 15){
-                                    toHref("tradingnews");
+                                    toHref("newsopinion");
                                 }
                                 else {
-                                    toHref("news");
+                                    //toHref("news");
+                                    window.history.go(-2);
                                 }
                             });
                     }
@@ -540,6 +555,10 @@ export default class Root extends PureComponent {
             this.setState({lngText: "中文", curLng: "zh"});
         }
     }
+    typeChoose(res) {
+        let type = res.key;
+        this.setState({chooseLeveltype: type});
+    }
     render() {
         const {
             curLng,
@@ -561,7 +580,9 @@ export default class Root extends PureComponent {
             url,
             isShowSave,
             hasUpload,
-            source_url
+            source_url,
+            levelType,
+            chooseLeveltype
         } = this.state;
         const {} = this.props;
         const logoContent = (
@@ -571,6 +592,15 @@ export default class Root extends PureComponent {
                     上传项目的logo，尺寸为：94*94,可提让UI提供
                 </div>
             </div>
+        );
+        const menu = (
+            <Menu onClick={this
+                .typeChoose
+                .bind(this)}>
+                    {levelType && levelType.map((item, index) => {
+                        return <Menu.Item key={index}>{item}</Menu.Item>;
+                    })}
+            </Menu>
         );
         return (
             <div className="mainBox addnewsstep ">
@@ -644,6 +674,17 @@ export default class Root extends PureComponent {
                                         typeList={tagNameArr}/>
                                 </div>
                             )}
+                        </div>
+                        <div className="proAndnew ui level">
+                            <div className="new ">
+                                <div className="mess">推送优先级</div>
+                                <Dropdown overlay={menu} placement="bottomLeft">
+                                    <Button>
+                                        {levelType[chooseLeveltype]}
+                                        <Icon type="down"/>
+                                    </Button>
+                                </Dropdown>
+                            </div>
                         </div>
                         <div className="orgial">
                             <div className="half">
