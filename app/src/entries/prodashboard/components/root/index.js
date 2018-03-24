@@ -151,8 +151,8 @@ export default class Root extends PureComponent {
 						<img src={img} alt="" />
 					</div>
 					<div className="mess1 ui jc-sa ai-c">
-						<span className="text1">{long_name}</span>
-						<span className="text2">({name})</span>
+						<span className="text1">{name}</span>
+						<span className="text2">({long_name})</span>
 					</div>
 					<div className="trading">{type_name}</div>
 					<div className="mess2">{desc}</div>
