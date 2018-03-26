@@ -522,7 +522,7 @@ export default class Root extends PureComponent {
                                     toHref("helpcenter");
                                 }
                                 else if(type == 12 || type == 13 || type == 14 || type == 15){
-                                    toHref("tradingnews");
+                                    toHref("newsopinion");
                                 }
                                  else {
                                     toHref("news");
