@@ -402,7 +402,7 @@ export default class Root extends PureComponent {
 	public() {
 		const that = this;
 		let query = getRouteQuery(this);
-		const htmlTop = '<!DOCTYPE html> <html> <head> <meta charset="UTF-8"> <title></title> <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"> </head> <body style="width: 100%;height: auto;">';
+		const htmlTop = '<!DOCTYPE html> <html> <head> <meta charset="UTF-8"> <title></title> <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"> </head> <body><style>body{ width: 100%!important;height: auto;box-sizing:border-box!important;margin:0!important;padding:10px!important; } body table{width: 100%!important; line-height: 24px !important; font-size: 12px !important;} body img{max-width: 100%!important;} body p,body span,body b,body li{ line-height: 24px !important; font-size: 12px !important; }</style>';
 		const htmlBottom = '</body> </html>';
 		let htmlContent = window.editor.fullHtml().replace(/<!doctype html>/,"");
 		let obj = {
