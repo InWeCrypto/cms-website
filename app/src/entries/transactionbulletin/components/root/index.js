@@ -286,14 +286,14 @@ export default class Root extends PureComponent {
 												</span>
 											</div>
 											<div className="f3 ui jc-c ai-c btn-box">
-												<button
+												{/* <button
 													onClick={this.editNews.bind(
 														this,
 														item
 													)}
 												>
 													编辑
-												</button>
+												</button> */}
 												<button
 													onClick={this.deleteNews.bind(
 														this,
