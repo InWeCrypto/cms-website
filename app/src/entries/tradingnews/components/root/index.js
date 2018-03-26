@@ -338,7 +338,7 @@ export default class Root extends PureComponent {
                                                 		className={"linkBtn"}
                                                 		to={{
 																											pathname: "editReadNum",
-																											search: `?id=${item.id}&lang=${this.state.lang}&click_rate_truth=${item.click_rate_truth}&click_rate=${item.click_rate}`
+																											search: `?id=${item.id}&lang=${this.state.lang}&click_rate_truth=${item.click_rate_truth}&click_rate=${item.click_rate}&path=${this.props.location.pathname}`
 																										}}>
                                                     修改阅读量
                                                 </Link>
