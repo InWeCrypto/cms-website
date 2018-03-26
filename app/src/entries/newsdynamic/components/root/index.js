@@ -338,6 +338,14 @@ export default class Root extends PureComponent {
                                                     .bind(this, item)}>
                                                     删除
                                                 </button>
+                                                <Link
+                                                		className={"linkBtn"}
+                                                		to={{
+																											pathname: "editReadNum",
+																											search: `?id=${item.id}&lang=${this.state.lang}&click_rate_truth=${item.click_rate_truth}&click_rate=${item.click_rate}`
+																										}}>
+                                                    修改阅读量
+                                                </Link>
                                             </div>
                                         </div>
                                     );
