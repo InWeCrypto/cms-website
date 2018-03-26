@@ -14,15 +14,17 @@ export default class Root extends PureComponent {
             id:'',
             click_rate_truth: "",
             click_rate: "",
+            path: "",
         };
     }
     componentDidMount() {
-    		const { id, lang, click_rate_truth, click_rate} = getRouteQuery(this);
+    		const { id, lang, click_rate_truth, click_rate, path} = getRouteQuery(this);
         this.setState({
         	id,
         	lang,
         	click_rate_truth,
         	click_rate,
+        	path: path?path.replace(/\//,""):"",
         });
     }
     putEditData(){
@@ -32,16 +34,19 @@ export default class Root extends PureComponent {
     	}).then(res=>{
     		this.setState({click_rate: this.state.num})
     		message.info(res.msg);
+    		setTimeout(()=>{
+    			this.props.history.go(-1);
+    		},1500)
     	})
     }
     numChange(value){
     	this.setState({num: value});
     }
     render() {
-        const { click_rate_truth, click_rate} = this.state;
+        const { click_rate_truth, click_rate, path} = this.state;
         return (
             <div className="mainBox ui ">
-                <Menunav curmenu="news" curchildmenu="helpcenter"/>
+                <Menunav curmenu="news" curchildmenu={path}/>
                 <div className="home-box f1 editReadNum">
                     <Title namestr="修改阅读量"/>
                     <div className="ct">
