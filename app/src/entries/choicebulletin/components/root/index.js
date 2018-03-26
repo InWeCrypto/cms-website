@@ -52,7 +52,23 @@ export default class Root extends PureComponent {
     }
     
     release(item){
-    	this.props.release(item.id).then(res => {
+        let data = {
+            id: item.id,
+            isSendHei: false
+        }
+    	this.props.release(data).then(res => {
+    		const {code, msg} = res;
+      	if (code != 4000) return;
+      	message.success(msg);
+      	this.getData();
+    	});
+    }
+    releaseHei(item){
+        let data = {
+            id: item.id,
+            isSendHei: true
+        }
+    	this.props.release(data).then(res => {
     		const {code, msg} = res;
       	if (code != 4000) return;
       	message.success(msg);
@@ -146,9 +162,14 @@ export default class Root extends PureComponent {
                                             </div>
                                             <div className="f2 ui jc-c ai-c btn-box">
                                                 { 
-                                               		item.article_id == "0" && <button
-                                               			onClick={this.release.bind(this,item)} 
-                                               		> 发布 </button>
+                                                       item.article_id == "0" && 
+                                                       <button onClick={this.release.bind(this,item)} 
+                                                        > 低推送 </button> 
+                                                }
+                                                { 
+                                                       item.article_id == "0" && 
+                                                       <button onClick={this.releaseHei.bind(this,item)} 
+                                                        > 高推送 </button>
                                                	}
                                                 {
                                                 	item.article_id != "0" && <button 

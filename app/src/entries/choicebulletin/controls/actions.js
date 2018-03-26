@@ -22,9 +22,12 @@ export const getExchangeList = createAction(EXCHANGELIST, params => {
 	});
 });
 
-export const release = createAction(RELEASE, id => {
+export const release = createAction(RELEASE, data => {
 	return http.post({
-		url: `ex_notice_spider/${id}/online`,
+        url: `ex_notice_spider/${data.id}/online`,
+        params: {
+            send_app_message: data.isSendHei
+        }
 	});
 });
 

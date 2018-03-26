@@ -675,17 +675,22 @@ export default class Root extends PureComponent {
                                 </div>
                             )}
                         </div>
-                        <div className="proAndnew ui level">
-                            <div className="new ">
-                                <div className="mess">推送优先级</div>
-                                <Dropdown overlay={menu} placement="bottomLeft">
-                                    <Button>
-                                        {levelType[chooseLeveltype]}
-                                        <Icon type="down"/>
-                                    </Button>
-                                </Dropdown>
-                            </div>
-                        </div>
+                        {
+                            !(type == 8 || type == 9 || type == 10 || type == 11) && (
+                                <div className="proAndnew ui level">
+                                    <div className="new ">
+                                        <div className="mess">推送优先级</div>
+                                        <Dropdown overlay={menu} placement="bottomLeft">
+                                            <Button>
+                                                {levelType[chooseLeveltype]}
+                                                <Icon type="down"/>
+                                            </Button>
+                                        </Dropdown>
+                                    </div>
+                                </div>
+                            )
+                        }
+                        
                         <div className="orgial">
                             <div className="half">
                                 <div className="mess">是否原创</div>

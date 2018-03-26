@@ -216,7 +216,7 @@ export default class Root extends PureComponent {
             <div className="mainBox ui">
                 <Menunav curmenu="news" curchildmenu="newsproject"/>
                 <div className="home-box f1 newsBox">
-                    <Title namestr="资讯管理"/>
+                    <Title namestr="项目资讯"/>
                     <div className="searchbox ui ai-c">
                         <div className="searchinput">
                             <Search
