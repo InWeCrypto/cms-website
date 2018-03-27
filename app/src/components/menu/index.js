@@ -250,6 +250,20 @@ class Menu extends PureComponent {
                         </div>
                     </li>
                     <li
+                        className={curmenu == "feedback"
+                        ? "cur"
+                        : ""}>
+                        <div className="menu-wallet menuicon"/>
+                        <div className="menu-name">
+                            <NavLink
+                                to={{
+                                pathname: "/feedback"
+                            }}>
+                                意见反馈
+                            </NavLink>
+                        </div>
+                    </li>
+                    <li
                         className={curmenu == "system"
                         ? "cur"
                         : ""}>

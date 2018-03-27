@@ -43,6 +43,7 @@ import Transactionbulletin from "./entries/transactionbulletin";
 import Helpcenter from "./entries/helpcenter";
 import Choicebulletin from "./entries/choicebulletin";
 import EditReadNum from "./entries/editReadNum";
+import Feedback from "./entries/feedback";
 
 //authority  addauthor
 export default() => {
@@ -90,6 +91,7 @@ export default() => {
             <Route path="/helpcenter" component={Helpcenter}/>
             <Route path="/choicebulletin" component={Choicebulletin}/>
             <Route path="/editReadNum" component={EditReadNum}/>
+            <Route path="/feedback" component={Feedback}/>
         </Switch>
     );
 };
