@@ -249,6 +249,9 @@ export default class Root extends PureComponent {
 							<div className="f2">
 								<span>标题</span>
 							</div>
+                            <div className="f2">
+                                <span>实际/当前阅读量</span>
+                            </div>
 							<div className="f2">
 								<span>修改时间</span>
 							</div>
@@ -278,6 +281,9 @@ export default class Root extends PureComponent {
 											<div className="f2">
 												<span>{item.title}</span>
 											</div>
+                                            <div className="f2">
+                                                <span>{item.click_rate_truth}/{item.click_rate}</span>
+                                            </div>
 											<div className="f2">
 												<span>
 													{getLocalTime(

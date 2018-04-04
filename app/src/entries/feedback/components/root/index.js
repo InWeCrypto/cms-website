@@ -74,7 +74,7 @@ export default class Root extends PureComponent {
                 <Menunav curmenu="feedback" />
                 <div className="home-box f1 editReadNum">
                     <Title namestr="意见反馈"/>
-                    {popStatus && <div className="ct">
+                    {popStatus && <div className="ct feedBackCt">
 											<ul>
 												<li>
 													<label>用户账户：</label>

@@ -39,6 +39,9 @@ export default class Root extends PureComponent {
     		},1500)
     	})
     }
+    back(){
+        this.props.history.go(-1);
+    }
     numChange(value){
     	this.setState({num: value});
     }
@@ -63,7 +66,9 @@ export default class Root extends PureComponent {
 													<label>修改阅读量：</label>
 													<InputNumber onChange={this.numChange.bind(this)} min={0} />
 													<button onClick={this.putEditData.bind(this)} className="linkBtn">确定</button>
+                                                    <button onClick={this.back.bind(this)} className="linkBtn">返回</button>
 												</li>
+                                                
 											</ul>
 										</div>
                 </div>
