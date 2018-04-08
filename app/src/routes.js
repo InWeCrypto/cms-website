@@ -44,6 +44,8 @@ import Helpcenter from "./entries/helpcenter";
 import Choicebulletin from "./entries/choicebulletin";
 import EditReadNum from "./entries/editReadNum";
 import Feedback from "./entries/feedback";
+import Useroptions from "./entries/useroptions";
+import Useroptionslist from "./entries/useroptionslist";
 
 //authority  addauthor
 export default() => {
@@ -92,6 +94,8 @@ export default() => {
             <Route path="/choicebulletin" component={Choicebulletin}/>
             <Route path="/editReadNum" component={EditReadNum}/>
             <Route path="/feedback" component={Feedback}/>
+            <Route path="/useroptions" exact component={Useroptions}/>
+            <Route path="/useroptionslist" exact component={Useroptionslist}/>
         </Switch>
     );
 };

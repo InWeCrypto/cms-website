@@ -222,6 +222,20 @@ class Menu extends PureComponent {
 						</div>
 					</li> */}
                     <li
+                        className={curmenu == "useroptions"
+                        ? "cur"
+                        : ""}>
+                        <div className="menu-user menuicon"/>
+                        <div className="menu-name">
+                            <NavLink
+                                to={{
+                                pathname: "/useroptions"
+                            }}>
+                                评论管理
+                            </NavLink>
+                        </div>
+                    </li>
+                    <li
                         className={curmenu == "user"
                         ? "cur"
                         : ""}>
