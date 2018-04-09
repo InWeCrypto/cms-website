@@ -53,6 +53,7 @@ export default() => {
         <Switch>
             <Route path="/" exact component={Login}/> {/* <Route path="/" exact component={Home} /> */}
             <Route path="/home" component={Home}/>
+            <Route path="/home/home" component={Home}/>
             <Route path="/permission" component={Permission}/>
             <Route path="/addauthor" component={AddAuthor}/>
             <Route path="/permissionstep" component={PermissionStep}/>

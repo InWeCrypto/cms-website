@@ -25,7 +25,8 @@ export default class Root extends PureComponent {
 			address: "",
 			icon: "",
 			category_id: "",
-			id: null
+            id: null,
+            decimals: 18
 		};
 	}
 	componentDidMount() {
@@ -55,7 +56,8 @@ export default class Root extends PureComponent {
 							gas: data.gas,
 							id: data.id,
 							name: data.name,
-							category_id: data.category_id
+                            category_id: data.category_id,
+                            decimals: data.decimals
 						});
 					}
 				});
@@ -132,7 +134,7 @@ export default class Root extends PureComponent {
 		});
 	}
 	onSubmit() {
-		const { id, name, gas, address, icon, category_id } = this.state;
+		const { id, name, gas, address, icon, category_id ,decimals} = this.state;
 		//oHref("capital");
 
 		let reg = /^[0-9a-zA-Z]+$/;
@@ -167,7 +169,8 @@ export default class Root extends PureComponent {
 				address: address,
 				icon: icon,
 				category_id: category_id,
-				id: id
+                id: id,
+                decimals
 			};
 			this.props.editCapitalDetail(param).then(res => {
 				if (res.code === 4000) {
@@ -187,7 +190,8 @@ export default class Root extends PureComponent {
 			gas,
 			address,
 			img,
-			callbackimg
+            callbackimg,
+            decimals
 		} = this.state;
 		const {} = this.props;
 
@@ -207,6 +211,7 @@ export default class Root extends PureComponent {
 								onChange={this.inputChange.bind(this, "name")}
 							/>
 						</div>
+                        
 						<div className="box1 ui">
 							<div className="text">GAS</div>
 							<input
@@ -228,6 +233,16 @@ export default class Root extends PureComponent {
 									this,
 									"address"
 								)}
+							/>
+						</div>
+                        <div className="box1 ui">
+							<div className="text">小数位数</div>
+							<input
+								className="minput"
+								type="text"
+								placeholder="Neo默认8，Eth默认18"
+								value={decimals}
+								onChange={this.inputChange.bind(this, "decimals")}
 							/>
 						</div>
 						<div className="box1 ui">
