@@ -19,11 +19,12 @@ class Root extends PureComponent {
 		super(props);
 		this.state = {
 			per_page: 10,
-			page: 1
+			page: 1,
+			name: ''
 		};
 	}
 	componentWillUpdate(nextProps, nextState) {
-		if (nextState.page != this.state.page) {
+		if (nextState.page != this.state.page || nextState.name !== this.state.name) {
 			this.getData(nextState);
 		}
 	}
@@ -31,11 +32,12 @@ class Root extends PureComponent {
 		this.getData(this.state);
 		this.props.getWalletList();
 	}
+	searchClick(value) {
+		this.setState({ name: value, page: 1 });
+	}
 	getData(state) {
-		let param = {
-			per_page: state.per_page,
-			page: state.page
-		};
+		const { name } = state;
+		let param = { name };
 		this.props.getCapitalList(param);
 	}
 	addPage(item) {
@@ -45,7 +47,7 @@ class Root extends PureComponent {
 		toHref(
 			"addcapital",
 			`tokenname=${item.wallet_category.name}&tokenid=${
-				item.category_id
+			item.category_id
 			}&id=${item.id}`
 		);
 	}
@@ -57,20 +59,20 @@ class Root extends PureComponent {
 	deleteCapital(item) {
 		let param = {
 			id: item.id
-        };
-        const that = this;
-        Modal.confirm({
-            title: "提示",
-            content: "确认删除",
-            onOk: function(){
-                that
-                .props
-                .deleteCapital(param);
-            },
-            onCancel: function(){
+		};
+		const that = this;
+		Modal.confirm({
+			title: "提示",
+			content: "确认删除",
+			onOk: function () {
+				that
+					.props
+					.deleteCapital(param);
+			},
+			onCancel: function () {
 
-            }
-        });
+			}
+		});
 	}
 	render() {
 		const { per_page } = this.state;
@@ -87,6 +89,12 @@ class Root extends PureComponent {
 				<Menunav curmenu="capital" />
 				<div className="home-box capitalBox f1">
 					<Title namestr="资产管理" />
+					<div className="searchbox ui ai-c">
+						<div className="searchinput">
+							<Search search={(val) => this.searchClick(val)} placeholder="查找文章ID或标题关键字" />
+						</div>
+						<div style={{ width: "0.05rem" }}></div>
+					</div>
 					<div className="bigbtnBox ui">
 						{walletList &&
 							walletList &&

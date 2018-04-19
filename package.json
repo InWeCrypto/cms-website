@@ -9,7 +9,7 @@
 		"postinstall": "electron-builder install-app-dep && webpack  --progress --profile --config webpack.dll.config.js",
 		"pack": "electron-builder --dir",
 		"dist": "webpack --config webpack.dll.config.js && electron-builder",
-		"dist1": "webpack --config webpack.dll.config.js&&webpack  --config webpack.config.js --progress --profile&&electron-builder"
+		"dist1": "webpack --config webpack.dll.config.js&&webpack  --config webpack.config.js --progress --profile&&electron-builder -mw"
 	},
 	"build": {
 		"appId": "com.electron.inwecrypto",
