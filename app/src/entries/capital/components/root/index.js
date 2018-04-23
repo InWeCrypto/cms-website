@@ -37,7 +37,12 @@ class Root extends PureComponent {
 	}
 	getData(state) {
 		const { name } = state;
-		let param = { name };
+		//let param = { name };
+		let param = {
+			per_page: state.per_page,
+			page: state.page,
+			name: name
+		};
 		this.props.getCapitalList(param);
 	}
 	addPage(item) {
