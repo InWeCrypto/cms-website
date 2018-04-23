@@ -96,7 +96,7 @@ class Root extends PureComponent {
 					<Title namestr="资产管理" />
 					<div className="searchbox ui ai-c">
 						<div className="searchinput">
-							<Search search={(val) => this.searchClick(val)} placeholder="查找文章ID或标题关键字" />
+							<Search search={(val) => this.searchClick(val)} placeholder="查找项目全称" />
 						</div>
 						<div style={{ width: "0.05rem" }}></div>
 					</div>
