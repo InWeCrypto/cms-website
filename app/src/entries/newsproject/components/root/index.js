@@ -20,7 +20,7 @@ import icon2 from "../../../../assets/images/pic_ico.png";
 import icon3 from "../../../../assets/images/text_ico.png";
 import icon4 from "../../../../assets/images/file_ico.png";
 import icon5 from "../../../../assets/images/trading_ico2.jpg";
-import {toHref} from "../../../../utils/util";
+import {toHref, localpage} from "../../../../utils/util";
 
 import "./index.less";
 
@@ -30,7 +30,7 @@ export default class Root extends PureComponent {
         this.state = {
             ca_id: 0,
             per_page: 10,
-            page: 1,
+            page: localpage.get("newsproject")||1,
             type: 0,
             lang: "zh",
             keyword: "",
@@ -90,6 +90,7 @@ export default class Root extends PureComponent {
         if (state.is_sole.length > 0) {
             param.is_sole = state.is_sole;
         }
+        localpage.set({newsproject:param.page});
         this
             .props
             .getNewsList(param);
@@ -393,6 +394,7 @@ export default class Root extends PureComponent {
                                 onChange={this
                                 .onChange
                                 .bind(this)}
+                                defaultCurrent={this.state.page}
                                 total={newsList.total}
                                 defaultPageSize={per_page}/>)}
                         </div>

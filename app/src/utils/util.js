@@ -243,4 +243,21 @@ export const toHref = (toSit, query) => {
 		window.location.href = nowL + "#" + toSit;
 	}
 };
+
+
+export const localpage = {
+	set: (cur) => {
+		var pages = sessionStorage.getItem("pages");
+		pages = ( pages && pages.length > 0 ) ? JSON.parse(pages) : {};
+		sessionStorage.setItem("pages",JSON.stringify(Object.assign(pages,cur)));
+	},
+	get: (key) => {
+		var pages = sessionStorage.getItem("pages");
+		pages = ( pages && pages.length > 0 ) ? JSON.parse(pages) : {};
+		return (key in pages) ? pages[key] : null;
+	}
+}
+
+
+
 window.toHref = toHref;

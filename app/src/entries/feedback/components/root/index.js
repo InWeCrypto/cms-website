@@ -111,7 +111,7 @@ export default class Root extends PureComponent {
                             <div className="f1">
                                 <span>反馈类型</span>
                             </div>
-                            <div className="f1">
+                            <div className="f2">
                                 <span>反馈时间</span>
                             </div>
                             <div className="f1">
@@ -137,7 +137,7 @@ export default class Root extends PureComponent {
                                             <div className="f1">
                                                 <span> {typeInfo[item.type]} </span>
                                             </div>
-                                            <div className="f1">
+                                            <div className="f2">
                                                 <span>{getLocalTime(item.created_at)}</span>
                                             </div>
                                             <div className="f1">

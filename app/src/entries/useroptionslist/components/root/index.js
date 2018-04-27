@@ -135,7 +135,9 @@ export default class Root extends PureComponent {
         })
     }
     backTopre() {
-        window.history.go(-1)
+        //window.history.go(-1);
+        this.props.history.goBack()
+        //console.log(this.props.history.goBack())
     }
     render() {
         const {

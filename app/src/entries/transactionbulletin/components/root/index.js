@@ -13,7 +13,7 @@ import icon2 from "../../../../assets/images/pic_ico.png";
 import icon3 from "../../../../assets/images/text_ico.png";
 import icon4 from "../../../../assets/images/file_ico.png";
 import icon5 from "../../../../assets/images/trading_ico2.jpg";
-import { toHref } from "../../../../utils/util";
+import { toHref, localpage } from "../../../../utils/util";
 
 import "./index.less";
 
@@ -23,7 +23,7 @@ export default class Root extends PureComponent {
 		this.state = {
 			ca_id: 0,
 			per_page: 10,
-			page: 1,
+			page: localpage.get("transactionbulletin")||1,
 			type: 16,
 			lang: "zh",
 			keyword: "",
@@ -84,6 +84,8 @@ export default class Root extends PureComponent {
 		} else {
 			param.author = state.source_name;
 		}
+		localpage.set({transactionbulletin:param.page});
+		
 		this.props.getTransList(param).then(res => {
 			this.setState({
 				transList: res.data
@@ -352,6 +354,7 @@ export default class Root extends PureComponent {
 									<Pagination
 										onChange={this.onChange.bind(this)}
 										// defaultCurrent={transList.current_page}
+                    defaultCurrent={this.state.page}
 										total={transList.total}
 										defaultPageSize={per_page}
 									/>
