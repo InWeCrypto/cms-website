@@ -234,7 +234,7 @@ export default class Root extends PureComponent {
                         if (te) {
                             let pivot = te.pivot;
                             if (pivot) {
-                                console.log(5555, pivot.tag_id);
+                                //console.log(5555, pivot.tag_id);
                                 this.setState({
                                     tag_ids: pivot.tag_id
                                 }, setTags_id(this, pivot.tag_id));
