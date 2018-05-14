@@ -50,7 +50,7 @@ class Demo extends PureComponent {
 					"insertorderedlist",
 					"insertunorderedlist",
 					"|",
-				//	"image",
+				//	    "image",
                     "imageupload",
                     "mediaupload",
 					"link"
