@@ -4,21 +4,21 @@
 	"description": "dsds",
 	"main": "main.js",
 	"scripts": {
-		"dev": "concurrently \"webpack  --config webpack.config.js --progress --profile&& electron .\" \"cross-env NODE_ENV=production webpack --watch\"",
+		"dev":
+			"concurrently \"webpack  --config webpack.config.js --progress --profile&& electron .\" \"cross-env NODE_ENV=production webpack --watch\"",
 		"compile": "webpack --config webpack.config.js --progress --profile",
-		"postinstall": "electron-builder install-app-dep && webpack  --progress --profile --config webpack.dll.config.js",
+		"postinstall":
+			"electron-builder install-app-dep && webpack  --progress --profile --config webpack.dll.config.js",
 		"pack": "electron-builder --dir",
 		"dist": "webpack --config webpack.dll.config.js && electron-builder",
-        "dist1": "webpack --config webpack.dll.config.js&&webpack  --config webpack.config.js --progress --profile&&electron-builder -mw",
-        "dist2": "webpack --config webpack.dll.config.js&&webpack  --config webpack.config.js --progress --profile&&electron-builder -darwin"
+		"dist1":
+			"webpack --config webpack.dll.config.js&&webpack  --config webpack.config.js --progress --profile&&electron-builder -mw",
+		"dist2":
+			"webpack --config webpack.dll.config.js&&webpack  --config webpack.config.js --progress --profile&&electron-builder -m"
 	},
 	"build": {
 		"appId": "com.electron.inwecrypto",
-		"files": [
-			"./main.js",
-			"resources/index.html",
-			"resources/"
-		],
+		"files": ["./main.js", "resources/index.html", "resources/"],
 		"dmg": {
 			"contents": [
 				{
@@ -34,10 +34,7 @@
 			]
 		},
 		"linux": {
-			"target": [
-				"AppImage",
-				"deb"
-			]
+			"target": ["AppImage", "deb"]
 		},
 		"win": {
 			"target": "nsis",
