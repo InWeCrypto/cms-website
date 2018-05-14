@@ -16,6 +16,11 @@ class Demo extends PureComponent {
 			aliImgKey: ""
 		};
 	}
+	componentWillUnmount(){
+		if(window.editorTimer){
+			clearInterval(window.editorTimer)
+		}
+	}
 	componentDidMount() {
 		const that = this;
 		this.getAliKey();
@@ -197,7 +202,7 @@ class Demo extends PureComponent {
                         
 					}
 				});
-		}, 800000);
+		}, 500000);
 	}
 
 	uploader() {

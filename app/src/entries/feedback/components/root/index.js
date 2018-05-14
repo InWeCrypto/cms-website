@@ -77,6 +77,11 @@ export default class Root extends PureComponent {
                     {popStatus && <div className="ct feedBackCt">
 											<ul>
 												<li>
+													<label>
+														<button className="linkBtn" onClick={this.closeDetail.bind(this)} >返回 </button>
+													</label>
+												</li>
+												<li>
 													<label>用户账户：</label>
 													<p>{curDetail.user && curDetail.user.email}</p>
 												</li>
@@ -90,7 +95,7 @@ export default class Root extends PureComponent {
 												</li>
 											</ul>
 											<div className="area">{curDetail.content}</div>
-											<span className="closeBtn" onClick={this.closeDetail.bind(this)}></span>
+											{/*<span className="closeBtn" onClick={this.closeDetail.bind(this)}></span>*/}
 										</div>}
 										<div className="searchbox ui ai-c">
 											<Dropdown overlay={typeList} placement="bottomLeft">
@@ -111,7 +116,7 @@ export default class Root extends PureComponent {
                             <div className="f1">
                                 <span>反馈类型</span>
                             </div>
-                            <div className="f1">
+                            <div className="f2">
                                 <span>反馈时间</span>
                             </div>
                             <div className="f1">
@@ -137,7 +142,7 @@ export default class Root extends PureComponent {
                                             <div className="f1">
                                                 <span> {typeInfo[item.type]} </span>
                                             </div>
-                                            <div className="f1">
+                                            <div className="f2">
                                                 <span>{getLocalTime(item.created_at)}</span>
                                             </div>
                                             <div className="f1">

@@ -35,6 +35,7 @@ export default class Root extends PureComponent {
         let type = getQuery(search).type;
         let c_id = getQuery(search).c_id;
         let model = getQuery(search).model;
+        let backUrl = getQuery(search).backUrl;
         let newsType = this.state.newsType;
         let query;
 
@@ -51,6 +52,9 @@ export default class Root extends PureComponent {
         //是否是ico项目
         if (model) {
             query += "&model=" + model;
+        }
+        if (backUrl) {
+            query += "&backUrl=" + backUrl;
         }
 
         toHref(pageSit, query);

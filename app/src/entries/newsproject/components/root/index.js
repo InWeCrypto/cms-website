@@ -20,7 +20,7 @@ import icon2 from "../../../../assets/images/pic_ico.png";
 import icon3 from "../../../../assets/images/text_ico.png";
 import icon4 from "../../../../assets/images/file_ico.png";
 import icon5 from "../../../../assets/images/trading_ico2.jpg";
-import {toHref} from "../../../../utils/util";
+import {toHref, localpage} from "../../../../utils/util";
 
 import "./index.less";
 
@@ -30,7 +30,7 @@ export default class Root extends PureComponent {
         this.state = {
             ca_id: 0,
             per_page: 10,
-            page: 1,
+            page: localpage.get("newsproject")||1,
             type: 0,
             lang: "zh",
             keyword: "",
@@ -79,6 +79,7 @@ export default class Root extends PureComponent {
             per_page: state.per_page,
             page: state.page,
             type: typeTemp,
+            is_category: 1,
             category_id
         };
         if (state.keyword.length > 0) {
@@ -90,24 +91,25 @@ export default class Root extends PureComponent {
         if (state.is_sole.length > 0) {
             param.is_sole = state.is_sole;
         }
+        localpage.set({newsproject:param.page});
         this
             .props
             .getNewsList(param);
     }
     addVideoNews() {
-        toHref("addchooselng", "to=addnewsstep&type=1");
+        toHref("addchooselng", "to=addnewsstep&type=1&backUrl=newsproject");
     }
     addImgNews() {
-        toHref("addchooselng", "to=addnewsstep&type=2");
+        toHref("addchooselng", "to=addnewsstep&type=2&backUrl=newsproject");
     }
     addTextNews() {
-        toHref("addchooselng", "to=addnewsstep&type=3");
+        toHref("addchooselng", "to=addnewsstep&type=3&backUrl=newsproject");
     }
     addFinder() {
-        toHref("addchooselng", "to=addnewsstep&type=4");
+        toHref("addchooselng", "to=addnewsstep&type=4&backUrl=newsproject");
     }
     addTradingNews() {
-        toHref("addchooselng", "to=addnewsstep&type=5");
+        toHref("addchooselng", "to=addnewsstep&type=5&backUrl=newsproject");
     }
     getType(type) {
         var res = "";
@@ -393,6 +395,7 @@ export default class Root extends PureComponent {
                                 onChange={this
                                 .onChange
                                 .bind(this)}
+                                defaultCurrent={this.state.page}
                                 total={newsList.total}
                                 defaultPageSize={per_page}/>)}
                         </div>

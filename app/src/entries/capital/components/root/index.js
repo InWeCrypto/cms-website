@@ -123,11 +123,14 @@ class Root extends PureComponent {
 							<div className="f1">
 								<span>序号</span>
 							</div>
-							<div style={{ width: "400px" }}>
+							<div style={{ width: "200px" }}>
 								<span>合约地址</span>
 							</div>
 							<div className="f2">
 								<span>项目全称</span>
+							</div>
+							<div className="f3">
+								<span>添加时间</span>
 							</div>
 							<div className="f2">
 								<span>资产类型</span>
@@ -149,11 +152,14 @@ class Root extends PureComponent {
 											<div className="f1">
 												<span>{index + 1}</span>
 											</div>
-											<div style={{ width: "400px" }}>
-												<span>{item.address}</span>
+											<div style={{ width: "200px" }}>
+												<span style={{overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap",display:"inline-block",width:"100%"}}>{item.address}</span>
 											</div>
 											<div className="f2">
 												<span>{item.name}</span>
+											</div>
+											<div className="f3">
+												<span>{item.created_at}</span>
 											</div>
 											<div className="f2">
 												<span>
