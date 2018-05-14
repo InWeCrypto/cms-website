@@ -195,7 +195,7 @@ class Menu extends PureComponent {
 							</NavLink>
 						</div>
 					</li> */}
-                    <li
+                    {/*<li
                         className={curmenu == "advertisement"
                         ? "cur"
                         : ""}>
@@ -208,7 +208,7 @@ class Menu extends PureComponent {
                                 广告管理
                             </NavLink>
                         </div>
-                    </li>
+                    </li>*/}
                     {/* <li className={curmenu == "comment" ? "cur" : ""}>
 						<div className="menu-comment menuicon" />
 						<div className="menu-name">

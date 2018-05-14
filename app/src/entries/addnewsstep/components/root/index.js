@@ -478,7 +478,11 @@ export default class Root extends PureComponent {
                             .props
                             .postArticleTag(data)
                             .then(res => {
-                                //是trading
+                                console.log('query',query)
+                            		if(query.backUrl){
+                            			return toHref(query.backUrl);
+                            		}
+                            		//是trading
                                 if (type == 5 || type == 7) {
                                     toHref("tradingnews");
                                 } else if(type == 8 || type == 9 || type == 10 || type == 11){
@@ -514,6 +518,10 @@ export default class Root extends PureComponent {
                             .props
                             .postArticleTag(data)
                             .then(res => {
+	                            	console.log('query',query)
+                            		if(query.backUrl){
+                            			return toHref(query.backUrl);
+                            		}
                                 //是trading
                                 if (type == 5 || type == 7) {
                                     toHref("tradingnews");
@@ -715,7 +723,7 @@ export default class Root extends PureComponent {
                                     </div>
                                 </div>
                             </div>
-                            {(type == 2 || type == 1 || type == 4 ) && (
+                            {(type == 2 || type == 1 || type == 4 || type == 13 || type == 5 ) && (
                                 <div className="half">
                                     <div className="mess">是否轮播</div>
                                     <div className="icon ui ">

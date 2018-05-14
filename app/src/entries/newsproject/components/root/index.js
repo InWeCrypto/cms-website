@@ -79,6 +79,7 @@ export default class Root extends PureComponent {
             per_page: state.per_page,
             page: state.page,
             type: typeTemp,
+            is_category: 1,
             category_id
         };
         if (state.keyword.length > 0) {
@@ -96,19 +97,19 @@ export default class Root extends PureComponent {
             .getNewsList(param);
     }
     addVideoNews() {
-        toHref("addchooselng", "to=addnewsstep&type=1");
+        toHref("addchooselng", "to=addnewsstep&type=1&backUrl=newsproject");
     }
     addImgNews() {
-        toHref("addchooselng", "to=addnewsstep&type=2");
+        toHref("addchooselng", "to=addnewsstep&type=2&backUrl=newsproject");
     }
     addTextNews() {
-        toHref("addchooselng", "to=addnewsstep&type=3");
+        toHref("addchooselng", "to=addnewsstep&type=3&backUrl=newsproject");
     }
     addFinder() {
-        toHref("addchooselng", "to=addnewsstep&type=4");
+        toHref("addchooselng", "to=addnewsstep&type=4&backUrl=newsproject");
     }
     addTradingNews() {
-        toHref("addchooselng", "to=addnewsstep&type=5");
+        toHref("addchooselng", "to=addnewsstep&type=5&backUrl=newsproject");
     }
     getType(type) {
         var res = "";

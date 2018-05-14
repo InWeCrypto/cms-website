@@ -99,10 +99,10 @@ export default class Root extends PureComponent {
             .getNewsList(param);
     }
     addVideoNews() {
-        toHref("addchooselng", "to=addnewsstep&type=7");
+        toHref("addchooselng", "to=addnewsstep&type=7&backUrl=tradingnews");
     }
     addImgNews() {
-        toHref("addchooselng", "to=addnewsstep&type=5");
+        toHref("addchooselng", "to=addnewsstep&type=5&backUrl=tradingnews");
     }
 
     getType(type) {
