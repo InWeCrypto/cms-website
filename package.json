@@ -14,7 +14,12 @@
 		"dist1":
 			"webpack --config webpack.dll.config.js&&webpack  --config webpack.config.js --progress --profile&&electron-builder -mw",
 		"dist2":
-			"webpack --config webpack.dll.config.js&&webpack  --config webpack.config.js --progress --profile&&electron-builder -m"
+			"webpack --config webpack.dll.config.js&&webpack  --config webpack.config.js --progress --profile&&electron-builder -m",
+		"other":
+			"cross-env NODE_ENV=otheruser node setUseConfig.js && npm run dist1",
+		"other:mac":
+			"cross-env NODE_ENV=otheruser node setUseConfig.js && npm run dist2",
+		"owner": "node setUseConfig.js &&  npm run dist1"
 	},
 	"build": {
 		"appId": "com.electron.inwecrypto",
